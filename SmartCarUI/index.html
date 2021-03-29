@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html itemscope="" itemtype="http://schema.org/WebPage" lang="tr">
+  <head>
+    <title>Smart Car</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="style/car.css" />
+  </head>
+  <body>
+    <div class="car-panel">
+      <table class="car-table">
+        <tr>
+          <td rowspan="2">
+            <table class="left-panel">
+              <tr>
+                <td colspan="3" class="digit center">SIGNAL</td>
+              </tr>
+              <tr>
+                <td>
+                  <button id="signal-left">
+                    <img src="imgs/signal.svg" />
+                  </button>
+                </td>
+                <td>
+                  <button></button>
+                </td>
+                <td>
+                  <button id="signal-right">
+                    <img src="imgs/signal.svg" />
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="3" class="digit center">HEADLIGHT</td>
+              </tr>
+              <tr class="headlight-row">
+                <td>
+                  <button>
+                    <span class="digit">ON</span>
+                  </button>
+                </td>
+                <td>
+                  <button>
+                    <span class="digit">OFF</span>
+                  </button>
+                </td>
+                <td>
+                  <button>
+                    <span class="digit">AUTO</span>
+                  </button>
+                </td>
+              </tr>
+              <tr class="headlight-l">
+                <td>
+                  <button>
+                    <img src="imgs/headlightL.svg" />
+                  </button>
+                </td>
+                <td></td>
+                <td>
+                  <button>
+                    <img src="imgs/headlight.svg" />
+                  </button>
+                </td>
+              </tr>
+            </table>
+          </td>
+          <td>
+            <table class="buttons-table">
+              <tr>
+                <td>
+                  <button id="d-lt" type="button" tabindex="-1">
+                    <img src="imgs/arrow.svg" />
+                  </button>
+                </td>
+                <td>
+                  <button id="d-t" type="button" tabindex="-1">
+                    <img src="imgs/arrow.svg" />
+                  </button>
+                </td>
+                <td>
+                  <button id="d-rt" type="button" tabindex="-1">
+                    <img src="imgs/arrow.svg" />
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <button id="d-lc" type="button" tabindex="-1">
+                    <img src="imgs/arrow.svg" />
+                  </button>
+                </td>
+                <td>
+                  <button id="d-c" type="button" tabindex="-1">
+                    <img src="imgs/horn.svg" />
+                  </button>
+                </td>
+                <td>
+                  <button id="d-rc" type="button" tabindex="-1">
+                    <img src="imgs/arrow.svg" />
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <button id="d-lb" type="button" tabindex="-1">
+                    <img src="imgs/arrow.svg" />
+                  </button>
+                </td>
+                <td>
+                  <button id="d-b" type="button" tabindex="-1">
+                    <img src="imgs/arrow.svg" />
+                  </button>
+                </td>
+                <td>
+                  <button id="d-rb" type="button" tabindex="-1">
+                    <img src="imgs/arrow.svg" />
+                  </button>
+                </td>
+              </tr>
+            </table>
+          </td>
+          <td rowspan="2">
+            <table class="right-panel">
+              <tr>
+                <td>
+                  <button>
+                    <img src="imgs/warning.svg" />
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <button>
+                    <img src="imgs/parking.svg" />
+                  </button>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <table class="distance-table">
+              <tr>
+                <td class="left">
+                  <span class="digit distance-value left">012</span>
+                  <span class="digit">cm</span>
+                </td>
+                <td class="right">
+                  <span class="digit distance-value">015</span>
+                  <span class="digit">cm</span>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="5">
+            <table class="dashboard-table">
+              <tr>
+                <td class="center">
+                  <img id="signal-left" src="imgs/signalopen.svg" />
+                </td>
+                <td class="center"><img src="imgs/headlightopen.svg" /></td>
+                <td class="center"><img src="imgs/headlightLopen.svg" /></td>
+                <td class="center"><img src="imgs/parkingopen.svg" /></td>
+                <td class="center">
+                  <img id="battery-lamb" src="imgs/battery3.svg" />
+                </td>
+                <td class="center">
+                  <img src="imgs/nightopem.svg" />
+                </td>
+                <td class="center"><img src="imgs/signalclose.svg" /></td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <script type="text/javascript" src="script/car.js"></script>
+  </body>
+</html>

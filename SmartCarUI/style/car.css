@@ -1,0 +1,146 @@
+@font-face {
+  font-family: digital;
+  src: url("../font/digital-7.ttf");
+}
+html {
+  margin-top: -60px;
+}
+body {
+  background-color: rgb(31, 31, 31);
+  color: aliceblue;
+}
+* {
+  outline: none;
+  user-select: none;
+}
+.car-panel {
+}
+td {
+  vertical-align: top;
+}
+
+.digit {
+  font-family: digital;
+}
+
+.left {
+  text-align: left;
+}
+.right {
+  text-align: right;
+}
+.center {
+  text-align: center;
+}
+.car-table {
+  margin: auto;
+  margin-top: 100px;
+}
+.buttons-table button {
+  width: 70px;
+  height: 70px;
+  background-color: rgb(63, 63, 63);
+  overflow: hidden;
+}
+.buttons-table button img {
+  width: 70px;
+  height: 70px;
+  background-color: rgb(63, 63, 63);
+  outline: none;
+  overflow: hidden;
+  max-width: 100%;
+  max-height: 100%;
+}
+.buttons-table button#d-lt {
+  border-radius: 15px 0 0 0;
+}
+.buttons-table button#d-lt img {
+  transform: rotate(-135deg);
+}
+
+.buttons-table button#d-t img {
+  transform: rotate(-90deg);
+}
+.buttons-table button#d-rt {
+  border-radius: 0 15px 0 0;
+}
+
+.buttons-table button#d-rt img {
+  transform: rotate(-45deg);
+}
+.buttons-table button#d-lc img {
+  transform: rotate(-180deg);
+}
+
+.buttons-table button#d-c {
+  padding: 15px;
+}
+/*.buttons-table button#d-rc img {
+} */
+.buttons-table button#d-lb {
+  border-radius: 0 0 0 15px;
+}
+.buttons-table button#d-lb img {
+  transform: rotate(135deg);
+}
+
+.buttons-table button#d-b img {
+  transform: rotate(90deg);
+}
+.buttons-table button#d-rb {
+  border-radius: 0 0 15px 0;
+}
+.buttons-table button#d-rb img {
+  transform: rotate(45deg);
+}
+.distance-table {
+  width: 100%;
+}
+
+.distance-value {
+  font-size: 3em;
+  color: #ff4444;
+}
+.dashboard-table {
+  width: 100%;
+}
+.dashboard-table td {
+  width: 14.285%;
+  vertical-align: middle;
+}
+.dashboard-table td img#battery-lamb {
+  transform: rotate(-90deg);
+}
+.dashboard-table td img {
+  max-width: 20px;
+  max-height: 20px;
+}
+.dashboard-table td img#signal-left {
+  transform: rotate(180deg);
+}
+.left-panel button {
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  overflow: hidden;
+  background-color: rgb(63, 63, 63);
+}
+.left-panel button img {
+  max-width: 100%;
+  max-height: 100%;
+}
+.left-panel button#signal-left {
+  transform: rotate(-180deg);
+}
+.left-panel .headlight-row button {
+  color: aliceblue;
+}
+.right-panel button {
+  background-color: rgb(63, 63, 63);
+  width: 135px;
+  padding: 10px 0;
+  border-radius: 5px;
+}
+.right-panel button img {
+  width: 45px;
+}
