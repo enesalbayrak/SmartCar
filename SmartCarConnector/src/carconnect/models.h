@@ -1,15 +1,18 @@
-#ifndef LIGHTSTATUS_H
-#define LIGHTSTATUS_H
 #include<enums.h>
-
-struct LightStatus
-{
+struct CarControlData{
+    uint8_t LeftMotorPower;
+    uint8_t RightMotorPower;
     LightStatusType LeftSignal;
     LightStatusType RightSignal;
     LightStatusType HeadLight;
     LightStatusType LongHeadLight;
     LightStatusType BackLight;
     LightStatusType QuadSignal;
+    BuzzerSignalLevel BuzzerLevel;
 };
 
-#endif
+struct CarSensorData
+{
+    uint8_t BatteryLevel;
+    uint8_t LightLevel;
+};

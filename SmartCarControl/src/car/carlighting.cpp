@@ -11,28 +11,28 @@ CarLighting::CarLighting()
 void CarLighting::setLightStatus(LightStatus status)
 {
     this->status=status;
-    if(status.BackLight==LightStatusType::OPEN)
+    if(status.BackLight==LightStatusType::LIGHT_OPEN)
         backLight->open();
     else
         backLight->close();
 
-    if(status.HeadLight==LightStatusType::OPEN)
-        headLight->open(status.LongHeadLight==LightStatusType::OPEN?LONG_HEADLIGHT_VALUE:SHORT_HEADLIGHT_VALUE);
+    if(status.HeadLight==LightStatusType::LIGHT_OPEN)
+        headLight->open(status.LongHeadLight==LightStatusType::LIGHT_OPEN?LONG_HEADLIGHT_VALUE:SHORT_HEADLIGHT_VALUE);
     else
         headLight->close();
 
-    if(status.QuadSignal==LightStatusType::OPEN){
+    if(status.QuadSignal==LightStatusType::LIGHT_OPEN){
         leftSignal->start();
         rightSignal->start();
     }
     else
     {
-        if(status.LeftSignal==LightStatusType::OPEN)
+        if(status.LeftSignal==LightStatusType::LIGHT_OPEN)
             leftSignal->start();
         else
             leftSignal->stop();
 
-        if(status.RightSignal==LightStatusType::OPEN)
+        if(status.RightSignal==LightStatusType::LIGHT_OPEN)
             rightSignal->start();
         else
             rightSignal->stop();

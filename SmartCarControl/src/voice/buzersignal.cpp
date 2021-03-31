@@ -18,30 +18,30 @@ void BuzzerSignal::setLevel(BuzzerSignalLevel level){
     lastMillis=millis();
     switch (level)
     {
-    case LEVEL1:
+    case BUZZER_LEVEL1:
         highTime=LEVEL_1_HIGH_TIME;
         lowTime=LEVEL_1_LOW_TIME;
         loopActive=true;
         buzzerStatus=HIGH;
         break;
-    case LEVEL2:
+    case BUZZER_LEVEL2:
         highTime=LEVEL_2_HIGH_TIME;
         lowTime=LEVEL_2_LOW_TIME;
         loopActive=true;
         buzzerStatus=HIGH;
         break;
-    case LEVEL3:
+    case BUZZER_LEVEL3:
         highTime=LEVEL_3_HIGH_TIME;
         lowTime=LEVEL_3_LOW_TIME;
         loopActive=true;
         buzzerStatus=HIGH;
         break;
-    case OPEN:
+    case BUZZER_OPEN:
         loopActive=false;
         buzzerStatus=HIGH;
         break;
     
-    case CLOSE:
+    case BUZZER_CLOSE:
         loopActive=false;
         buzzerStatus=LOW;
         break;

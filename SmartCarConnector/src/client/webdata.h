@@ -1,11 +1,6 @@
 #ifndef WEBDATA_H
 #define WEBDATA_H
-enum LightStatusType{
-    CLOSE=0,
-    OPEN=1
-};
-
-
+#include <enums.h>
 struct WebData
 {
     int LeftMotorPower;

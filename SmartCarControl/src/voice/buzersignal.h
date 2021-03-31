@@ -2,13 +2,7 @@
 #define BUZZERSIGNAL_H
 #include<stdint.h>
 #include<loopcontrol.h>
-enum BuzzerSignalLevel{
-    CLOSE=0,
-    LEVEL1=1,
-    LEVEL2=2,
-    LEVEL3=3,
-    OPEN=4
-};
+#include<enums.h>
 class BuzzerSignal:public LoopControl
 {
 private:
@@ -17,7 +11,7 @@ private:
     uint8_t lowTime;
     bool loopActive=false;
     unsigned long lastMillis;
-    BuzzerSignalLevel level=BuzzerSignalLevel::CLOSE;
+    BuzzerSignalLevel level=BuzzerSignalLevel::BUZZER_CLOSE;
     uint8_t buzzerStatus;
 public:
     BuzzerSignal(uint8_t pinAddress);
