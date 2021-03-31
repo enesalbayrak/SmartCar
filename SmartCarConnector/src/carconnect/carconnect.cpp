@@ -11,11 +11,17 @@ CarSensorData *CarConnect::communicate(CarControlData *data){
   char *dataAddr=(char*)(data);
   Wire.beginTransmission(I2C_CAR_CONNECTION_ADDRESS); // transmit to device #4
   Wire.write(dataAddr,sizeof(CarControlData));
-  Wire.endTransmission();
-
+  int res=Wire.endTransmission();
+  Serial.print("Transmission Status:");
+  Serial.println(res);
   Wire.requestFrom(I2C_CAR_CONNECTION_ADDRESS,sizeof(CarSensorData));
   uint8_t *resultBytes=(uint8_t *)malloc(sizeof(CarSensorData));
   Wire.readBytes(resultBytes,sizeof(CarSensorData));
   CarSensorData *result=(CarSensorData*)resultBytes;
+  Serial.print("BatteryLevel:");
+  Serial.print(result->BatteryLevel);
+  Serial.print(" LightLevel:");
+  Serial.println(result->LightLevel);
+  delay(1000);
   return result;
 }

@@ -12,6 +12,7 @@ void setup() {
   Serial.begin(115200);
   client= new CarClient(SSID,PASSWORD,CAR_KEY);
   connect = new CarConnect();
+  Serial.println();
   while (!client->connectWifi())
   {
     Serial.println("Connecting WiFi...");
@@ -21,6 +22,7 @@ void setup() {
   {
     Serial.println("Connecting Api...");
   }
+  Serial.println("Connections Completed!");
   carData=new CarData();
   carData->BackDistance=0;
   carData->BatteryPower=0;
@@ -36,7 +38,6 @@ void loop() {
     Serial.println("Unsuccesfull");
     return;
   }
-  Serial.println("Data Sending...");
 
   CarControlData *controlData= new CarControlData();
   controlData->BackLight=webData->BackLight;
@@ -51,5 +52,4 @@ void loop() {
   CarSensorData * sensorData=connect->communicate(controlData);
   carData->BatteryPower=sensorData->BatteryLevel;
   carData->LightLevel=sensorData->LightLevel;
-  delay(5000);
 }

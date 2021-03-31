@@ -19,6 +19,7 @@ void receive(int count){
   Wire.readBytes(arr,sizeof(CarControlData));
   CarControlData *data=(CarControlData*)arr;
   _manager->bindData(data);
+  delete data;
 }
 
 void request(){
@@ -29,4 +30,5 @@ void request(){
   Serial.print(" Battery \t:");
   Serial.println(result->BatteryLevel);  
   Wire.write(dataAddr,sizeof(CarSensorData));
+  delete result;
 }
