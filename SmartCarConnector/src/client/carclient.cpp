@@ -39,10 +39,10 @@ bool  CarClient::connectApi(){
 WebData * CarClient::getData(CarData *carData){
    if (WiFi.status() == WL_CONNECTED) { 
     DynamicJsonDocument doc(1024);
-    doc["ll"]=carData->LightLevel;
-    doc["bp"]=carData->BatteryPower;
-    doc["bd"]=carData->BackDistance;
-    doc["fd"]=carData->FrontDistance;
+    doc["ll"]=carData->lightLevel;
+    doc["bp"]=carData->batteryPower;
+    doc["bd"]=carData->backDistance;
+    doc["fd"]=carData->frontDistance;
     HTTPClient http; 
     http.begin(String(CAR_API_ENDPOINT)); 
     http.addHeader("connection-key",key);
@@ -54,16 +54,15 @@ WebData * CarClient::getData(CarData *carData){
       String payload = http.getString();   
       deserializeJson(doc,payload);
       WebData * wd= new WebData();
-      wd->LeftMotorPower=doc["lmp"];
-      wd->RightMotorPower=doc["rmp"];
-      wd->HeadLight=doc["hl"];
-      wd->BackLight=doc["bl"];
-      wd->LeftSignal=doc["ls"];
-      wd->RightSignal=doc["rs"];
-      wd->LongHeadLight=doc["lhl"];
-      wd->QuadSignal=doc["qs"];
-      wd->ParkActivity=doc["prk"];
-      wd->HornActivity=doc["hrn"];
+      wd->movementDirection=doc["md"];
+      wd->headLight=doc["hl"];
+      wd->backLight=doc["bl"];
+      wd->leftSignal=doc["ls"];
+      wd->rightSignal=doc["rs"];
+      wd->longHeadLight=doc["lhl"];
+      wd->quadSignal=doc["qs"];
+      wd->parkActivity=doc["pr"];
+      wd->hornActivity=doc["hr"];
       return wd;
     }
     http.end();

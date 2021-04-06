@@ -1,18 +1,16 @@
 #include<enums.h>
 struct CarControlData{
-    uint8_t LeftMotorPower;
-    uint8_t RightMotorPower;
-    LightStatusType LeftSignal;
-    LightStatusType RightSignal;
-    LightStatusType HeadLight;
-    LightStatusType LongHeadLight;
-    LightStatusType BackLight;
-    LightStatusType QuadSignal;
-    BuzzerSignalLevel BuzzerLevel;
+    LightStatusType leftSignal;
+    LightStatusType rightSignal;
+    LightStatusType headLight;
+    LightStatusType longHeadLight;
+    LightStatusType backLight;
+    LightStatusType quadSignal;
+    BuzzerSignalLevel buzzerLevel;
 };
 
 struct CarSensorData
 {
-    uint8_t BatteryLevel;
-    uint8_t LightLevel;
+    uint8_t batteryLevel;
+    uint8_t lightLevel;
 };

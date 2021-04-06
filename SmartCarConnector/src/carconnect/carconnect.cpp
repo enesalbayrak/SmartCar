@@ -19,9 +19,9 @@ CarSensorData *CarConnect::communicate(CarControlData *data){
   Wire.readBytes(resultBytes,sizeof(CarSensorData));
   CarSensorData *result=(CarSensorData*)resultBytes;
   Serial.print("BatteryLevel:");
-  Serial.print(result->BatteryLevel);
+  Serial.print(result->batteryLevel);
   Serial.print(" LightLevel:");
-  Serial.println(result->LightLevel);
+  Serial.println(result->lightLevel);
   delay(1000);
   return result;
 }

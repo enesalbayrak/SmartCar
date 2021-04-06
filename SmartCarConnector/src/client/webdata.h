@@ -3,16 +3,15 @@
 #include <enums.h>
 struct WebData
 {
-    int LeftMotorPower;
-    int RightMotorPower;
-    LightStatusType LeftSignal;
-    LightStatusType RightSignal;
-    LightStatusType HeadLight;
-    LightStatusType LongHeadLight;
-    LightStatusType BackLight;
-    LightStatusType QuadSignal;
-    bool ParkActivity;
-    bool HornActivity;
+    MovementDirection movementDirection;
+    LightStatusType leftSignal;
+    LightStatusType rightSignal;
+    LightStatusType headLight;
+    LightStatusType longHeadLight;
+    LightStatusType backLight;
+    LightStatusType quadSignal;
+    bool parkActivity;
+    bool hornActivity;
 };
 
 #endif

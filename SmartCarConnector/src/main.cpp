@@ -1,15 +1,18 @@
 #include <Arduino.h>
 #include <client/carclient.h>
 #include <carconnect/carconnect.h>
+#include <control/movement.h>
 #define SSID  "SUPERONLINE_WiFi_3314"
 #define PASSWORD  "LH7YX4LAYHHP"
 #define CAR_KEY "12345678"
 CarClient *client;
 CarConnect *connect;
 CarData *carData;
+Movement *movement;
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(115200);
+  movement= new Movement();
   client= new CarClient(SSID,PASSWORD,CAR_KEY);
   connect = new CarConnect();
   Serial.println();
@@ -24,10 +27,10 @@ void setup() {
   }
   Serial.println("Connections Completed!");
   carData=new CarData();
-  carData->BackDistance=0;
-  carData->BatteryPower=0;
-  carData->FrontDistance=0;
-  carData->LightLevel=0;
+  carData->backDistance=0;
+  carData->batteryPower=0;
+  carData->frontDistance=0;
+  carData->lightLevel=0;
   
 }
 
@@ -36,20 +39,16 @@ void loop() {
   if(webData==nullptr)
   {
     Serial.println("Unsuccesfull");
+    movement->move(MovementDirection::PASSIVE);
     return;
   }
-
+  movement->move(webData->movementDirection);
   CarControlData *controlData= new CarControlData();
-  controlData->BackLight=webData->BackLight;
-  controlData->BuzzerLevel=BuzzerSignalLevel::BUZZER_CLOSE;
-  controlData->HeadLight=webData->HeadLight;
-  controlData->LeftMotorPower=webData->LeftMotorPower;
-  controlData->LeftSignal=webData->LeftSignal;
-  controlData->LongHeadLight=webData->LongHeadLight;
-  controlData->QuadSignal=webData->QuadSignal;
-  controlData->RightMotorPower=webData->RightMotorPower;
-  controlData->RightSignal=webData->RightSignal;
-  CarSensorData * sensorData=connect->communicate(controlData);
-  carData->BatteryPower=sensorData->BatteryLevel;
-  carData->LightLevel=sensorData->LightLevel;
+  controlData->backLight=webData->backLight;
+  controlData->buzzerLevel=BuzzerSignalLevel::BUZZER_CLOSE;
+  controlData->headLight=webData->headLight;
+  controlData->leftSignal=webData->leftSignal;
+  controlData->longHeadLight=webData->longHeadLight;
+  controlData->quadSignal=webData->quadSignal;
+  controlData->rightSignal=webData->rightSignal;
 }

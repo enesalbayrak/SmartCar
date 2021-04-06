@@ -40,15 +40,14 @@ namespace SmartCar.Web.Controllers
                 WebModel =
                 new WebDataModel
                 {
+                    MovementDirection=MovementDirection.Passive,
                     BackLightStatus = LightStatus.Close,
                     HeadLightStatus = LightStatus.Close,
                     HornActivity = false,
-                    LeftMotorPower = 0,
                     LeftSignalStatus = LightStatus.Close,
                     LongHeadLight = LightStatus.Close,
                     ParkActivity = false,
                     QuadSignal = LightStatus.Close,
-                    RightMotorPower = 0,
                     RightSignalStatus = LightStatus.Close,
                 }
             });
@@ -63,6 +62,7 @@ namespace SmartCar.Web.Controllers
                 return NotFound();
 
             connection.CarModel = model;
+            Console.WriteLine($"Car Connect Time:{DateTime.Now:HH:mm:ss}");
             return Ok(connection.WebModel);
         }
 

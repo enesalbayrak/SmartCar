@@ -16,41 +16,21 @@ Movement::~Movement()
     delete right;
 }
 
-void Movement::move(MovePosition position)
+void Movement::move(MovementDirection direction)
 {
-    if(position==MovePosition::PASSIVE){
+    if(direction==MovementDirection::PASSIVE){
         left->stop();
         right->stop();
         return;
     }
     bool in2,in1,in0;
-    in2=(position&0x04)==0x04;
-    in1=(position&0x02)==0x02;
-    in0=(position&0x01)==0x01;
+    in2=(direction&0x04)==0x04;
+    in1=(direction&0x02)==0x02;
+    in0=(direction&0x01)==0x01;
     bool leftActive=(in2 | in1 | in0) & (!in2 | in1 | !in0);
     bool leftDir=!in2 & !in0 | !in1;
     bool rightActive=!in1 | (!in2 & in0) | (in2 & !in0);
     bool rightDir=!in2;
-    // String printText="in data:";
-    // printText+=in2?"1":"0";
-    // printText+=in1?"1":"0";
-    // printText+=in0?"1":"0";
-    // //Serial.println(printText);
-
-    // printText="move data";
-    
-    // printText+="\tleft active:";
-    // printText+=leftActive?"1":"0";
-    // printText+="\tleft:";
-    // printText+=leftDir?"1":"0";
-    // Serial.print(printText);
-    // printText="";
-    // printText+="\tright active:";
-    // printText+=rightActive?"1":"0";
-    // printText+="\tright:";
-    // printText+=rightDir?"1":"0";
-
-    // Serial.println(printText);
 
     if(leftActive)
         left->go(leftDir);

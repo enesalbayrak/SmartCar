@@ -2,10 +2,10 @@
 #define CARDATA_h
  struct CarData
  {
-    int LightLevel;
-    int BatteryPower;
-    int BackDistance;
-    int FrontDistance;
+    int lightLevel;
+    int batteryPower;
+    int backDistance;
+    int frontDistance;
  };
  
 #endif
