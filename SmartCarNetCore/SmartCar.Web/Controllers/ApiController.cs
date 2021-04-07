@@ -20,14 +20,9 @@ namespace SmartCar.Web.Controllers
             _logger = logger;
         }
 
-        [HttpGet("car")]
-        public ActionResult CarConnect([FromHeader(Name = "connection-key")] string key)
+        private ConnectionModel CreateCarConnection(string key)
         {
-            var last = connections.FirstOrDefault(b => b.CarKey == key);
-            if (last != null)
-                connections.Remove(last);
-
-            connections.Add(new ConnectionModel
+            var connection = new ConnectionModel
             {
                 CarKey = key,
                 CarModel = new CarDataModel
@@ -40,7 +35,7 @@ namespace SmartCar.Web.Controllers
                 WebModel =
                 new WebDataModel
                 {
-                    MovementDirection=MovementDirection.Passive,
+                    MovementDirection = MovementDirection.Passive,
                     BackLightStatus = LightStatus.Close,
                     HeadLightStatus = LightStatus.Close,
                     HornActivity = false,
@@ -50,7 +45,18 @@ namespace SmartCar.Web.Controllers
                     QuadSignal = LightStatus.Close,
                     RightSignalStatus = LightStatus.Close,
                 }
-            });
+            };
+            connections.Add(connection);
+            return connection;
+        }
+
+        [HttpGet("car")]
+        public ActionResult CarConnect([FromHeader(Name = "connection-key")] string key)
+        {
+            var last = connections.FirstOrDefault(b => b.CarKey == key);
+            if (last != null)
+                connections.Remove(last);
+            CreateCarConnection(key);
             return Ok();
         }
 
@@ -59,10 +65,9 @@ namespace SmartCar.Web.Controllers
         {
             var connection = connections.FirstOrDefault(b => b.CarKey == key);
             if (connection == null)
-                return NotFound();
+                connection = CreateCarConnection(key);
 
             connection.CarModel = model;
-            Console.WriteLine($"Car Connect Time:{DateTime.Now:HH:mm:ss}");
             return Ok(connection.WebModel);
         }
 

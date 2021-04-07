@@ -9,9 +9,11 @@ CarClient *client;
 CarConnect *connect;
 CarData *carData;
 Movement *movement;
+
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(115200);
+  
   movement= new Movement();
   client= new CarClient(SSID,PASSWORD,CAR_KEY);
   connect = new CarConnect();
@@ -51,4 +53,6 @@ void loop() {
   controlData->longHeadLight=webData->longHeadLight;
   controlData->quadSignal=webData->quadSignal;
   controlData->rightSignal=webData->rightSignal;
+  delete webData;
+  delay(200);
 }
