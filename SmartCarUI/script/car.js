@@ -272,3 +272,220 @@ document.addEventListener("keyup", (ev) => {
   }
 });
 //#endregion
+
+//#region direction
+var directionStatus = {
+  front: false,
+  back: false,
+  left: false,
+  right: false,
+};
+
+function setDirectionStyle() {
+  if (directionStatus.front && directionStatus.left) {
+    document.getElementById("d-lf").classList.add("active");
+    document.getElementById("d-f").classList.remove("active");
+    document.getElementById("d-rf").classList.remove("active");
+    document.getElementById("d-l").classList.remove("active");
+    document.getElementById("d-r").classList.remove("active");
+    document.getElementById("d-lb").classList.remove("active");
+    document.getElementById("d-b").classList.remove("active");
+    document.getElementById("d-rb").classList.remove("active");
+  } else if (directionStatus.front && directionStatus.right) {
+    document.getElementById("d-lf").classList.remove("active");
+    document.getElementById("d-f").classList.remove("active");
+    document.getElementById("d-rf").classList.add("active");
+    document.getElementById("d-l").classList.remove("active");
+    document.getElementById("d-r").classList.remove("active");
+    document.getElementById("d-lb").classList.remove("active");
+    document.getElementById("d-b").classList.remove("active");
+    document.getElementById("d-rb").classList.remove("active");
+  } else if (directionStatus.back && directionStatus.left) {
+    document.getElementById("d-lf").classList.remove("active");
+    document.getElementById("d-f").classList.remove("active");
+    document.getElementById("d-rf").classList.remove("active");
+    document.getElementById("d-l").classList.remove("active");
+    document.getElementById("d-r").classList.remove("active");
+    document.getElementById("d-lb").classList.add("active");
+    document.getElementById("d-b").classList.remove("active");
+    document.getElementById("d-rb").classList.remove("active");
+  } else if (directionStatus.back && directionStatus.right) {
+    document.getElementById("d-lf").classList.remove("active");
+    document.getElementById("d-f").classList.remove("active");
+    document.getElementById("d-rf").classList.remove("active");
+    document.getElementById("d-l").classList.remove("active");
+    document.getElementById("d-r").classList.remove("active");
+    document.getElementById("d-lb").classList.remove("active");
+    document.getElementById("d-b").classList.remove("active");
+    document.getElementById("d-rb").classList.add("active");
+  } else if (directionStatus.front) {
+    document.getElementById("d-lf").classList.remove("active");
+    document.getElementById("d-f").classList.add("active");
+    document.getElementById("d-rf").classList.remove("active");
+    document.getElementById("d-l").classList.remove("active");
+    document.getElementById("d-r").classList.remove("active");
+    document.getElementById("d-lb").classList.remove("active");
+    document.getElementById("d-b").classList.remove("active");
+    document.getElementById("d-rb").classList.remove("active");
+  } else if (directionStatus.left) {
+    document.getElementById("d-lf").classList.remove("active");
+    document.getElementById("d-f").classList.remove("active");
+    document.getElementById("d-rf").classList.remove("active");
+    document.getElementById("d-l").classList.add("active");
+    document.getElementById("d-r").classList.remove("active");
+    document.getElementById("d-lb").classList.remove("active");
+    document.getElementById("d-b").classList.remove("active");
+    document.getElementById("d-rb").classList.remove("active");
+  } else if (directionStatus.right) {
+    document.getElementById("d-lf").classList.remove("active");
+    document.getElementById("d-f").classList.remove("active");
+    document.getElementById("d-rf").classList.remove("active");
+    document.getElementById("d-l").classList.remove("active");
+    document.getElementById("d-r").classList.add("active");
+    document.getElementById("d-lb").classList.remove("active");
+    document.getElementById("d-b").classList.remove("active");
+    document.getElementById("d-rb").classList.remove("active");
+  } else if (directionStatus.back) {
+    document.getElementById("d-lf").classList.remove("active");
+    document.getElementById("d-f").classList.remove("active");
+    document.getElementById("d-rf").classList.remove("active");
+    document.getElementById("d-l").classList.remove("active");
+    document.getElementById("d-r").classList.remove("active");
+    document.getElementById("d-lb").classList.remove("active");
+    document.getElementById("d-b").classList.add("active");
+    document.getElementById("d-rb").classList.remove("active");
+  } else {
+    document.getElementById("d-lf").classList.remove("active");
+    document.getElementById("d-f").classList.remove("active");
+    document.getElementById("d-rf").classList.remove("active");
+    document.getElementById("d-l").classList.remove("active");
+    document.getElementById("d-r").classList.remove("active");
+    document.getElementById("d-lb").classList.remove("active");
+    document.getElementById("d-b").classList.remove("active");
+    document.getElementById("d-rb").classList.remove("active");
+  }
+}
+document.addEventListener("keydown", (ev) => {
+  switch (ev.key.toLowerCase()) {
+    case "arrowup":
+    case "w":
+      directionStatus.front = true;
+      break;
+    case "arrowleft":
+    case "a":
+      directionStatus.left = true;
+      break;
+    case "arrowdown":
+    case "s":
+      directionStatus.back = true;
+      break;
+    case "arrowright":
+    case "d":
+      directionStatus.right = true;
+      break;
+  }
+  setDirectionStyle();
+});
+
+document.getElementById("d-lf").addEventListener("mousedown", () => {
+  directionStatus.left = true;
+  directionStatus.front = true;
+  setDirectionStyle();
+});
+document.getElementById("d-lf").addEventListener("mouseup", () => {
+  directionStatus.left = false;
+  directionStatus.front = false;
+  setDirectionStyle();
+});
+
+document.getElementById("d-f").addEventListener("mousedown", () => {
+  directionStatus.front = true;
+  setDirectionStyle();
+});
+document.getElementById("d-f").addEventListener("mouseup", () => {
+  directionStatus.front = false;
+  setDirectionStyle();
+});
+
+document.getElementById("d-rf").addEventListener("mousedown", () => {
+  directionStatus.right = true;
+  directionStatus.front = true;
+  setDirectionStyle();
+});
+document.getElementById("d-rf").addEventListener("mouseup", () => {
+  directionStatus.right = false;
+  directionStatus.front = false;
+  setDirectionStyle();
+});
+
+document.getElementById("d-l").addEventListener("mousedown", () => {
+  directionStatus.left = true;
+  setDirectionStyle();
+});
+document.getElementById("d-l").addEventListener("mouseup", () => {
+  directionStatus.left = false;
+  setDirectionStyle();
+});
+
+document.getElementById("d-r").addEventListener("mousedown", () => {
+  directionStatus.right = true;
+  setDirectionStyle();
+});
+document.getElementById("d-r").addEventListener("mouseup", () => {
+  directionStatus.right = false;
+  setDirectionStyle();
+});
+
+document.getElementById("d-lb").addEventListener("mousedown", () => {
+  directionStatus.left = true;
+  directionStatus.back = true;
+  setDirectionStyle();
+});
+document.getElementById("d-lb").addEventListener("mouseup", () => {
+  directionStatus.left = false;
+  directionStatus.back = false;
+  setDirectionStyle();
+});
+
+document.getElementById("d-b").addEventListener("mousedown", () => {
+  directionStatus.back = true;
+  setDirectionStyle();
+});
+document.getElementById("d-b").addEventListener("mouseup", () => {
+  directionStatus.back = false;
+  setDirectionStyle();
+});
+
+document.getElementById("d-rb").addEventListener("mousedown", () => {
+  directionStatus.right = true;
+  directionStatus.back = true;
+  setDirectionStyle();
+});
+document.getElementById("d-rb").addEventListener("mouseup", () => {
+  directionStatus.right = false;
+  directionStatus.back = false;
+  setDirectionStyle();
+});
+
+document.addEventListener("keyup", (ev) => {
+  switch (ev.key.toLowerCase()) {
+    case "arrowup":
+    case "w":
+      directionStatus.front = false;
+      break;
+    case "arrowleft":
+    case "a":
+      directionStatus.left = false;
+      break;
+    case "arrowdown":
+    case "s":
+      directionStatus.back = false;
+      break;
+    case "arrowright":
+    case "d":
+      directionStatus.right = false;
+      break;
+  }
+  setDirectionStyle();
+});
+//#endregion

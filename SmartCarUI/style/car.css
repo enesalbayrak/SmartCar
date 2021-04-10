@@ -54,31 +54,31 @@ td {
   max-width: 100%;
   max-height: 100%;
 }
-.buttons-table button#d-lt {
+.buttons-table button#d-lf {
   border-radius: 15px 0 0 0;
 }
-.buttons-table button#d-lt img {
+.buttons-table button#d-lf img {
   transform: rotate(-135deg);
 }
 
-.buttons-table button#d-t img {
+.buttons-table button#d-f img {
   transform: rotate(-90deg);
 }
-.buttons-table button#d-rt {
+.buttons-table button#d-rf {
   border-radius: 0 15px 0 0;
 }
 
-.buttons-table button#d-rt img {
+.buttons-table button#d-rf img {
   transform: rotate(-45deg);
 }
-.buttons-table button#d-lc img {
+.buttons-table button#d-l img {
   transform: rotate(-180deg);
 }
 
 .buttons-table button#horn {
   padding: 15px;
 }
-/*.buttons-table button#d-rc img {
+/*.buttons-table button#d-r img {
 } */
 .buttons-table button#d-lb {
   border-radius: 0 0 0 15px;
@@ -115,8 +115,8 @@ td {
   transform: rotate(-90deg);
 }
 .dashboard-table td img {
-  max-width: 20px;
-  max-height: 20px;
+  max-width: 30px;
+  max-height: 30px;
 }
 .dashboard-table td img#signal-left-lamp {
   transform: rotate(180deg);
@@ -128,6 +128,7 @@ td {
   overflow: hidden;
   background-color: rgb(63, 63, 63);
 }
+
 .left-panel button img {
   max-width: 100%;
   max-height: 100%;
