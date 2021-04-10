@@ -194,4 +194,22 @@ document.getElementById("headlight-auto").addEventListener("click", () => {
   setHeadlight("AUTO");
 });
 
+document.addEventListener("keydown", (ev) => {
+  switch (ev.key.toLowerCase()) {
+    case "f":
+      setHeadlight("ON");
+      break;
+    case "g":
+      setHeadlight("OFF");
+      break;
+    case "h":
+      setHeadlight("AUTO");
+      break;
+
+    case "b":
+      setLongHeadlight(!headlightStatus.long);
+      break;
+  }
+});
+
 //#endregion
