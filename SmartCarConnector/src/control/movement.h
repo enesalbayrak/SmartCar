@@ -8,6 +8,7 @@ class Movement
 private:
     Motor *left;
     Motor *right;
+    MovementDirection lastDirection;
 public:
     Movement();
     ~Movement();
