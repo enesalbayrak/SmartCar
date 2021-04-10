@@ -3,6 +3,7 @@
   <head>
     <title>Smart Car</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="imgs/favicon.jpg" sizes="any" type="image/jpg" />
     <link rel="stylesheet" href="style/car.css" />
   </head>
   <body>
@@ -21,7 +22,7 @@
                   </button>
                 </td>
                 <td>
-                  <button></button>
+                  <button id="signal-close"></button>
                 </td>
                 <td>
                   <button id="signal-right">
@@ -34,31 +35,25 @@
               </tr>
               <tr class="headlight-row">
                 <td>
-                  <button>
+                  <button id="headlight-on">
                     <span class="digit">ON</span>
                   </button>
                 </td>
                 <td>
-                  <button>
+                  <button id="headlight-off" class="active">
                     <span class="digit">OFF</span>
                   </button>
                 </td>
                 <td>
-                  <button>
+                  <button id="headlight-auto">
                     <span class="digit">AUTO</span>
                   </button>
                 </td>
               </tr>
               <tr class="headlight-l">
-                <td>
-                  <button>
+                <td colspan="3" align="center">
+                  <button id="headlight-long">
                     <img src="imgs/headlightL.svg" />
-                  </button>
-                </td>
-                <td></td>
-                <td>
-                  <button>
-                    <img src="imgs/headlight.svg" />
                   </button>
                 </td>
               </tr>
@@ -123,7 +118,7 @@
             <table class="right-panel">
               <tr>
                 <td>
-                  <button>
+                  <button id="signal-quad">
                     <img src="imgs/warning.svg" />
                   </button>
                 </td>
@@ -159,10 +154,17 @@
             <table class="dashboard-table">
               <tr>
                 <td class="center">
-                  <img id="signal-left" src="imgs/signalopen.svg" />
+                  <img id="signal-left-lamp" src="imgs/signalclose.svg" />
                 </td>
-                <td class="center"><img src="imgs/headlightopen.svg" /></td>
-                <td class="center"><img src="imgs/headlightLopen.svg" /></td>
+                <td class="center">
+                  <img id="headlight-lamp" src="imgs/headlightclose.svg" />
+                </td>
+                <td class="center">
+                  <img
+                    id="headlight-long-lamp"
+                    src="imgs/headlightLclose.svg"
+                  />
+                </td>
                 <td class="center"><img src="imgs/parkingopen.svg" /></td>
                 <td class="center">
                   <img id="battery-lamb" src="imgs/battery3.svg" />
@@ -170,13 +172,21 @@
                 <td class="center">
                   <img src="imgs/nightopem.svg" />
                 </td>
-                <td class="center"><img src="imgs/signalclose.svg" /></td>
+                <td class="center">
+                  <img id="signal-right-lamp" src="imgs/signalclose.svg" />
+                </td>
               </tr>
             </table>
           </td>
         </tr>
       </table>
     </div>
+    <audio id="signal-open-audio">
+      <source src="voice/signal-open.mp3" />
+    </audio>
+    <audio id="signal-close-audio">
+      <source src="voice/signal-close.mp3" />
+    </audio>
     <script type="text/javascript" src="script/car.js"></script>
   </body>
 </html>

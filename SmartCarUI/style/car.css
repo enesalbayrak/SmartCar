@@ -15,6 +15,9 @@ body {
 }
 .car-panel {
 }
+button.active {
+  border-style: inset;
+}
 td {
   vertical-align: top;
 }
@@ -115,7 +118,7 @@ td {
   max-width: 20px;
   max-height: 20px;
 }
-.dashboard-table td img#signal-left {
+.dashboard-table td img#signal-left-lamp {
   transform: rotate(180deg);
 }
 .left-panel button {
@@ -129,7 +132,7 @@ td {
   max-width: 100%;
   max-height: 100%;
 }
-.left-panel button#signal-left {
+.left-panel button#signal-left img {
   transform: rotate(-180deg);
 }
 .left-panel .headlight-row button {
