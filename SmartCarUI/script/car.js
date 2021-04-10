@@ -124,8 +124,6 @@ document.addEventListener("keydown", (ev) => {
     case "o":
       setSignalStatus(signalStatus.quad ? "QUADCLOSE" : "QUAD");
       break;
-    default:
-      break;
   }
 });
 //#endregion
@@ -205,11 +203,72 @@ document.addEventListener("keydown", (ev) => {
     case "h":
       setHeadlight("AUTO");
       break;
-
     case "b":
       setLongHeadlight(!headlightStatus.long);
       break;
   }
 });
 
+//#endregion
+
+//#region  park
+var parkStatus = false;
+function setParkStatus(status) {
+  parkStatus = status;
+  if (parkStatus) {
+    document.getElementById("park").classList.add("active");
+    document.getElementById("park-lamp").src = "imgs/parkingopen.svg";
+  } else {
+    document.getElementById("park-lamp").src = "imgs/parkingclose.svg";
+    document.getElementById("park").classList.remove("active");
+  }
+}
+
+document.getElementById("park").addEventListener("click", () => {
+  setParkStatus(!parkStatus);
+});
+
+document.addEventListener("keydown", (ev) => {
+  switch (ev.key.toLowerCase()) {
+    case "p":
+      setParkStatus(!parkStatus);
+  }
+});
+
+//#endregion
+
+//#region  horn
+var hornStatus = false;
+function setHornStatus(status) {
+  hornStatus = status;
+  if (hornStatus) {
+    document.getElementById("horn").classList.add("active");
+  } else {
+    document.getElementById("horn").classList.remove("active");
+  }
+}
+
+document.getElementById("horn").addEventListener("mousedown", () => {
+  setHornStatus(true);
+});
+document.getElementById("horn").addEventListener("mouseup", () => {
+  setHornStatus(false);
+});
+
+document.getElementById("horn").addEventListener("mouseleave", () => {
+  setHornStatus(false);
+});
+
+document.addEventListener("keydown", (ev) => {
+  switch (ev.key.toLowerCase()) {
+    case "v":
+      setHornStatus(true);
+  }
+});
+document.addEventListener("keyup", (ev) => {
+  switch (ev.key.toLowerCase()) {
+    case "v":
+      setHornStatus(false);
+  }
+});
 //#endregion
