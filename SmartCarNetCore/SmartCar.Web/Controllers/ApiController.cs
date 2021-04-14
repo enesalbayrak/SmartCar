@@ -39,11 +39,9 @@ namespace SmartCar.Web.Controllers
                     BackLightStatus = LightStatus.Close,
                     HeadLightStatus = LightStatus.Close,
                     HornActivity = false,
-                    LeftSignalStatus = LightStatus.Close,
                     LongHeadLight = LightStatus.Close,
                     ParkActivity = false,
-                    QuadSignal = LightStatus.Close,
-                    RightSignalStatus = LightStatus.Close,
+                    SignalStatus = SignalStatus.Close,
                 }
             };
             connections.Add(connection);

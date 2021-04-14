@@ -10,33 +10,45 @@ CarLighting::CarLighting()
 
 void CarLighting::setLightStatus(LightStatus status)
 {
-    this->status=status;
-    if(status.BackLight==LightStatusType::LIGHT_OPEN)
-        backLight->open();
-    else
-        backLight->close();
-
-    if(status.HeadLight==LightStatusType::LIGHT_OPEN)
-        headLight->open(status.LongHeadLight==LightStatusType::LIGHT_OPEN?LONG_HEADLIGHT_VALUE:SHORT_HEADLIGHT_VALUE);
-    else
-        headLight->close();
-
-    if(status.QuadSignal==LightStatusType::LIGHT_OPEN){
-        leftSignal->start();
-        rightSignal->start();
-    }
-    else
+    if(this->status.BackLight!=status.BackLight)
     {
-        if(status.LeftSignal==LightStatusType::LIGHT_OPEN)
-            leftSignal->start();
+        if(status.BackLight==LightStatusType::LIGHT_OPEN)
+            backLight->open();
         else
-            leftSignal->stop();
-
-        if(status.RightSignal==LightStatusType::LIGHT_OPEN)
-            rightSignal->start();
-        else
-            rightSignal->stop();
+            backLight->close();
     }
+
+    if(this->status.HeadLight!=status.HeadLight||this->status.LongHeadLight!=status.LongHeadLight)
+    {
+        if(status.HeadLight==LightStatusType::LIGHT_OPEN)
+            headLight->open(status.LongHeadLight==LightStatusType::LIGHT_OPEN?LONG_HEADLIGHT_VALUE:SHORT_HEADLIGHT_VALUE);
+        else
+            headLight->close();
+    }
+    
+    if(this->status.SignalStatus!=status.SignalStatus)
+    {
+        switch (status.SignalStatus)
+        {
+        case SIGNAL_QUAD:
+            leftSignal->start();
+            rightSignal->start();
+            break;
+        case SIGNAL_LEFT:
+            leftSignal->start();
+            rightSignal->stop();
+            break;
+        case SIGNAL_RIGHT:
+            leftSignal->stop();
+            rightSignal->start();
+            break;
+        default:
+            leftSignal->stop();
+            rightSignal->stop();
+            break;
+        }
+    }
+    this->status=status;
 }
 
 

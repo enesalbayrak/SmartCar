@@ -2,6 +2,7 @@
 #include <Wire.h>
 #include <stdlib.h>
 #include <Arduino.h>
+#include<logging/ModelsLogger.h>
 #define I2C_CAR_CONNECTION_ADDRESS 41
 IDataManager *_manager;
 void receive(int count);
@@ -19,16 +20,14 @@ void receive(int count){
   Wire.readBytes(arr,sizeof(CarControlData));
   CarControlData *data=(CarControlData*)arr;
   _manager->bindData(data);
+  ModelsLogger::log(data);
   delete data;
 }
 
 void request(){
   CarSensorData *result=_manager->getData();
   char *dataAddr=(char *)(result);
-  Serial.print("Light \t:");
-  Serial.print(result->LightLevel);
-  Serial.print(" Battery \t:");
-  Serial.println(result->BatteryLevel);  
   Wire.write(dataAddr,sizeof(CarSensorData));
+  ModelsLogger::log(result);
   delete result;
 }

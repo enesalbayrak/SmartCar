@@ -7,6 +7,7 @@ private:
     /* data */
 public:
     CarConnect();
-    CarSensorData *communicate(CarControlData *data);
+    void send(CarControlData *data);
+    CarSensorData *receive();
 };
 #endif

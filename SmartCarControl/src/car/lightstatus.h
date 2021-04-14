@@ -4,12 +4,10 @@
 
 struct LightStatus
 {
-    LightStatusType LeftSignal;
-    LightStatusType RightSignal;
     LightStatusType HeadLight;
     LightStatusType LongHeadLight;
     LightStatusType BackLight;
-    LightStatusType QuadSignal;
+    SignalStatusType SignalStatus;
 };
 
 #endif

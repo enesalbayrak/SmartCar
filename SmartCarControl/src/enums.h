@@ -6,6 +6,14 @@ enum LightStatusType:uint8_t{
     LIGHT_CLOSE=0,
     LIGHT_OPEN=1
 };
+
+enum SignalStatusType:uint8_t{
+    SIGNAL_CLOSE=0,
+    SIGNAL_LEFT=1,
+    SIGNAL_RIGHT=2,
+    SIGNAL_QUAD=3
+};
+
 enum BuzzerSignalLevel:uint8_t{
     BUZZER_CLOSE=0,
     BUZZER_LEVEL1=1,

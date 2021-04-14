@@ -34,11 +34,11 @@ void Movement::move(MovementDirection direction)
         digitalWrite(STANDBY_PIN,LOW);
         return;
     }
-    
+    uint8_t newDirection=direction-1;;
     bool in2,in1,in0;
-    in2=(direction&0x04)==0x04;
-    in1=(direction&0x02)==0x02;
-    in0=(direction&0x01)==0x01;
+    in2=(newDirection&0x04)==0x04;
+    in1=(newDirection&0x02)==0x02;
+    in0=(newDirection&0x01)==0x01;
     bool leftActive=(in2 | in1 | in0) & (!in2 | in1 | !in0);
     bool leftDir=!in2 & !in0 | !in1;
     bool rightActive=!in1 | (!in2 & in0) | (in2 & !in0);

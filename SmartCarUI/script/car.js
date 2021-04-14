@@ -387,6 +387,28 @@ document.addEventListener("keydown", (ev) => {
   setDirectionStyle();
 });
 
+document.addEventListener("keyup", (ev) => {
+  switch (ev.key.toLowerCase()) {
+    case "arrowup":
+    case "w":
+      directionStatus.front = false;
+      break;
+    case "arrowleft":
+    case "a":
+      directionStatus.left = false;
+      break;
+    case "arrowdown":
+    case "s":
+      directionStatus.back = false;
+      break;
+    case "arrowright":
+    case "d":
+      directionStatus.right = false;
+      break;
+  }
+  setDirectionStyle();
+});
+
 document.getElementById("d-lf").addEventListener("mousedown", () => {
   directionStatus.left = true;
   directionStatus.front = true;
@@ -467,25 +489,4 @@ document.getElementById("d-rb").addEventListener("mouseup", () => {
   setDirectionStyle();
 });
 
-document.addEventListener("keyup", (ev) => {
-  switch (ev.key.toLowerCase()) {
-    case "arrowup":
-    case "w":
-      directionStatus.front = false;
-      break;
-    case "arrowleft":
-    case "a":
-      directionStatus.left = false;
-      break;
-    case "arrowdown":
-    case "s":
-      directionStatus.back = false;
-      break;
-    case "arrowright":
-    case "d":
-      directionStatus.right = false;
-      break;
-  }
-  setDirectionStyle();
-});
 //#endregion

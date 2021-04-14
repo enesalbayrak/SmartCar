@@ -2,6 +2,7 @@
 #include <esp8266wifi.h>
 #include <esp8266httpclient.h>
 #include <ArduinoJson.h>
+#include <logging/webdatalogger.h>
 #define CAR_API_ENDPOINT "http://192.168.1.26:5000/api/car"
 
  CarClient::CarClient(char * ssid,char *password,char *key){
@@ -56,13 +57,12 @@ WebData * CarClient::getData(CarData *carData){
       WebData * wd= new WebData();
       wd->movementDirection=doc["md"];
       wd->headLight=doc["hl"];
+      wd->longHeadLight=doc["lh"];
       wd->backLight=doc["bl"];
-      wd->leftSignal=doc["ls"];
-      wd->rightSignal=doc["rs"];
-      wd->longHeadLight=doc["lhl"];
-      wd->quadSignal=doc["qs"];
+      wd->signalStatus=doc["ss"];
       wd->parkActivity=doc["pr"];
       wd->hornActivity=doc["hr"];
+      // WebDataLogger::log(wd);
       return wd;
     }
     http.end();
