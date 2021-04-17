@@ -70,6 +70,12 @@ function setSignalLamp(status) {
 var signalStatus = {
   quad: false,
   signal: "CLOSE",
+  getStatusValue: () => {
+    if (signalStatus.quad) return 3;
+    if (signalStatus.signal == "LEFT") return 1;
+    else if (signalStatus.signal == "RIGHT") return 2;
+    return 0;
+  },
 };
 
 function setSignalStatus(status) {
@@ -489,4 +495,41 @@ document.getElementById("d-rb").addEventListener("mouseup", () => {
   setDirectionStyle();
 });
 
+//#endregion
+
+//#region connection
+var time = new Date();
+var newTime;
+var active = false;
+var connect = async () => {
+  newTime = new Date();
+  if (newTime - time < 100) {
+    return;
+  }
+  if (active) return;
+  active = true;
+  time = newTime;
+  try {
+    var result = await fetch("http://192.168.1.26:5000/api/web", {
+      method: "POST",
+      headers: {
+        "connection-key": "12345678",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        md: 0,
+        hl: headlightStatus.active ? 1 : 0,
+        bl: 0,
+        lh: headlightStatus.long ? 1 : 0,
+        ss: signalStatus.getStatusValue(),
+        pr: true,
+        hr: true,
+      }),
+    });
+  } catch (error) {
+    console.error(error);
+  }
+  active = false;
+};
+runAndSetInterval(connect, 50);
 //#endregion
