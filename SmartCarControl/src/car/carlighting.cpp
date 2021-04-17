@@ -4,6 +4,7 @@ CarLighting::CarLighting()
 {
     this->backLight=new LightControl(BACKLIGHT_PIN);
     this->headLight=new LightControl(HEADLIGHT_PIN);
+    this->backHeadLight=new LightControl(BACK_HEADLIGHT_PIN);
     this->leftSignal=new SignalLight(SIGNAL_LEFT_PIN);
     this->rightSignal=new SignalLight(SIGNAL_RIGHT_PIN);
 }
@@ -21,9 +22,15 @@ void CarLighting::setLightStatus(LightStatus status)
     if(this->status.HeadLight!=status.HeadLight||this->status.LongHeadLight!=status.LongHeadLight)
     {
         if(status.HeadLight==LightStatusType::LIGHT_OPEN)
+        {
+            backHeadLight->open();
             headLight->open(status.LongHeadLight==LightStatusType::LIGHT_OPEN?LONG_HEADLIGHT_VALUE:SHORT_HEADLIGHT_VALUE);
+        }
         else
+        {
+            backHeadLight->close();
             headLight->close();
+        }
     }
     
     if(this->status.SignalStatus!=status.SignalStatus)

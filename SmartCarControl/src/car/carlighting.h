@@ -9,6 +9,7 @@ class CarLighting:public LoopControl
 private:
     LightControl *backLight;
     LightControl *headLight;
+    LightControl *backHeadLight;
     SignalLight *leftSignal;
     SignalLight *rightSignal;
     LightStatus status;

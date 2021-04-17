@@ -2,8 +2,7 @@
 #include<Arduino.h>
 #define LDR_MIN_VALUE 1.0
 #define LDR_MAX_VALUE 1024.0
-double logMin=log10(LDR_MIN_VALUE);
-double logMax=log10(LDR_MAX_VALUE);
+double max=log10(LDR_MAX_VALUE);
 Ldr::Ldr(uint8_t pin){
     this->pin=pin;
     pinMode(pin,INPUT);
@@ -11,10 +10,10 @@ Ldr::Ldr(uint8_t pin){
 
 uint8_t Ldr::percent(){
     int value=analogRead(pin);
+    Serial.println(value);
     if(value<LDR_MIN_VALUE)
         value=LDR_MIN_VALUE;
     else if(value>LDR_MAX_VALUE)
         value=LDR_MAX_VALUE;
-    double val=log10(value);
-    return (uint8_t)(round(100*((val-logMin)/(logMax-logMin))));
+    return map(value,LDR_MIN_VALUE,LDR_MAX_VALUE,0,100);
 }

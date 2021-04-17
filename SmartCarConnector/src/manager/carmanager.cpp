@@ -3,7 +3,7 @@
 #define SSID  "SUPERONLINE_WiFi_3314"
 #define PASSWORD  "LH7YX4LAYHHP"
 #define CAR_KEY "12345678"
-#define MIN_RECEIVE_MS 200
+#define MIN_RECEIVE_MS 7000
 bool equalsCarControlData(CarControlData *d1,CarControlData *d2){
     return (d1->backLight==d2->backLight
          && d1->headLight==d2->headLight
