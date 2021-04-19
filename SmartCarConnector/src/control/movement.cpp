@@ -2,9 +2,9 @@
 #include<Arduino.h>
 #define LEFT_MOTOR_IN_A D5
 #define LEFT_MOTOR_IN_B D6
-#define RIGHT_MOTOR_IN_A D8
-#define RIGHT_MOTOR_IN_B D7
-#define STANDBY_PIN D4
+#define RIGHT_MOTOR_IN_A D4
+#define RIGHT_MOTOR_IN_B D3
+#define STANDBY_PIN D2
 Movement::Movement()
 {
     lastDirection=MovementDirection::PASSIVE;
