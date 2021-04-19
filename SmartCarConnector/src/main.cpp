@@ -1,11 +1,10 @@
 #include <Arduino.h>
 #include<manager/carmanager.h>
-CarManager manager;
+ CarManager manager;
 void setup() {
-  Serial.begin(115200);
-  manager.start();
+   manager.start();
 }
 
 void loop() {
-  manager.control();
+   manager.control();
 }

@@ -4,7 +4,6 @@
 class CarConnect
 {
 private:
-    /* data */
 public:
     CarConnect();
     void send(CarControlData *data);

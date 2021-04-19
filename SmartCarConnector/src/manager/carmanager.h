@@ -3,17 +3,26 @@
 #include <client/carclient.h>
 #include <carconnect/carconnect.h>
 #include <control/movement.h>
+#include <datamanager/idataconnector.h>
+#include <datamanager/serialdataconnector.h>
 
-class CarManager
+class CarManager:private IDataConnector
 {
 private:
     CarClient *client;
-    CarConnect *connect;
+    CarConnect *carConnect;
     CarData *carData;
     CarControlData *controlData;
     Movement *movement;
     long lastMillis;
     void receiveSensorData();
+    ConnectData *connectData;
+    SerialDataConnector *serialconnector;
+    ConnectData getData() override;
+    void dataChanged(ConnectData data) override;
+    void save() override;
+    void connect() override;
+    void exit() override;
 public:
     CarManager();
     ~CarManager();

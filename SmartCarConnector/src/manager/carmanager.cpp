@@ -14,9 +14,14 @@ bool equalsCarControlData(CarControlData *d1,CarControlData *d2){
 
 CarManager::CarManager()
 {
+    connectData= new ConnectData;
+    connectData->carKey=CAR_KEY;
+    connectData->ssid=SSID;
+    connectData->password=PASSWORD;
+    this->serialconnector= new SerialDataConnector(this);
     movement= new Movement();
-    client= new CarClient(SSID,PASSWORD,CAR_KEY);
-    connect = new CarConnect();
+    client= new CarClient();
+    carConnect = new CarConnect();
     carData=new CarData();
     carData->backDistance=0;
     carData->batteryPower=0;
@@ -35,22 +40,29 @@ CarManager::~CarManager()
 }
 
 void CarManager::start(){
-    lastMillis=millis();
-    Serial.println();
-    while (!client->connectWifi())
-    {
-        Serial.println("Connecting WiFi...");
-    }
 
-    while (!client->connectApi())
+  Serial.begin(115200);
+    Serial.println();
+    if(!Serial)
     {
-        Serial.println("Connecting Api...");
+
+      while (!client->connectWifi(connectData->ssid,connectData->password))
+      {
+          Serial.println("Connecting WiFi...");
+      }
+      while (!client->connectApi(connectData->carKey))
+      {
+          Serial.println("Connecting Api...");
+      }
+      Serial.println("Connections Completed!");
+      carConnect->send(controlData);
     }
-    Serial.println("Connections Completed!");
-    connect->send(controlData);
 }
 
 void  CarManager::control(){
+    serialconnector->read();
+    if(Serial)
+      return;
     WebData *webData=client->getData(carData);
   if(webData==nullptr)
   {
@@ -67,7 +79,7 @@ void  CarManager::control(){
   newControlData->signalStatus=webData->signalStatus;
   if(!equalsCarControlData(controlData,newControlData))
   {
-    connect->send(newControlData);
+    carConnect->send(newControlData);
     delete controlData;
     controlData=newControlData;
   }
@@ -83,9 +95,37 @@ void CarManager::receiveSensorData(){
     if(ms-lastMillis<MIN_RECEIVE_MS)
         return;
     lastMillis=ms;
-    CarSensorData *sensorData= connect->receive();
+    CarSensorData *sensorData= carConnect->receive();
     carData->backDistance=sensorData->backDistance;
     carData->frontDistance=sensorData->frontDistance;
     carData->batteryPower=sensorData->batteryLevel;
     carData->lightLevel=sensorData->lightLevel;
+}
+ConnectData CarManager::getData(){
+  return *connectData;
+}
+
+void CarManager::dataChanged(ConnectData data) {
+  this->connectData->carKey=data.carKey;
+  this->connectData->ssid=data.ssid;
+  this->connectData->password=data.password;
+}
+void CarManager::save() {
+
+}
+void CarManager::connect() {
+    if(client->connectWifi(connectData->ssid,connectData->password))
+    {
+      Serial.print("Connection successful");
+    }
+    else
+    {
+      Serial.print("Connection unsuccessful");
+    }
+    
+    Serial.print("\t SSID:");
+    Serial.println(connectData->ssid);
+}
+void  CarManager::exit(){
+
 }

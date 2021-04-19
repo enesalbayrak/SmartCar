@@ -5,17 +5,16 @@
 #include <logging/webdatalogger.h>
 #define CAR_API_ENDPOINT "http://192.168.1.26:5000/api/car"
 
- CarClient::CarClient(char * ssid,char *password,char *key){
-     this->ssid=ssid;
-     this->password=password;
-     this->key=key;
+ CarClient::CarClient(){
 }
 
-bool  CarClient::connectWifi(){
+bool  CarClient::connectWifi(String ssid,String password){
+     this->ssid=ssid;
+     this->password=password;
     WiFi.begin(ssid, password);
     uint8_t count=0;
     while (WiFi.status() != WL_CONNECTED) {
-     delay(1000);
+     delay(250);
      if(count==10)
       return false;
       count++;
@@ -23,7 +22,8 @@ bool  CarClient::connectWifi(){
     return true;
 }
 
-bool  CarClient::connectApi(){
+bool  CarClient::connectApi(String key){
+    this->key=key;
     if (WiFi.status() == WL_CONNECTED) { 
     HTTPClient http;  
     http.begin(String(CAR_API_ENDPOINT)); 

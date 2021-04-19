@@ -2,16 +2,17 @@
 #define CLIENT_H
 #include"webdata.h"
 #include"cardata.h"
+#include<Arduino.h>
 class CarClient
 {
 private:
-    char *ssid;
-    char *password;
-    char *key;
+    String ssid;
+    String password;
+    String key;
 public:
-    CarClient(char * ssid,char *password,char *key);
-    bool connectWifi();
-    bool connectApi();
+    CarClient();
+    bool connectWifi(String ssid,String password);
+    bool connectApi(String key);
     WebData *getData(CarData *carData);
 };
 #endif
