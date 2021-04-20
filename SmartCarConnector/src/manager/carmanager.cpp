@@ -4,6 +4,7 @@
 #define PASSWORD  "LH7YX4LAYHHP"
 #define CAR_KEY "12345678"
 #define MIN_RECEIVE_MS 7000
+#define LED_PIN 2
 bool equalsCarControlData(CarControlData *d1,CarControlData *d2){
     return (d1->backLight==d2->backLight
          && d1->headLight==d2->headLight
@@ -12,14 +13,19 @@ bool equalsCarControlData(CarControlData *d1,CarControlData *d2){
          && d1->buzzerLevel==d2->buzzerLevel);
 }
 
+bool CarManager::carIsActive(){
+  return connectData!=nullptr&&!usbMode;
+}
+
 CarManager::CarManager()
-{
-    connectData= new ConnectData;
-    connectData->carKey=CAR_KEY;
-    connectData->ssid=SSID;
-    connectData->password=PASSWORD;
+{ 
+    Serial.begin(115200);
+    Serial.print("\n\n\r");
+    pinMode(LED_PIN,OUTPUT);
+    digitalWrite(LED_PIN,HIGH);
+    connectData= this->saver.read();
     this->serialconnector= new SerialDataConnector(this);
-    movement= new Movement();
+     movement= new Movement();
     client= new CarClient();
     carConnect = new CarConnect();
     carData=new CarData();
@@ -40,33 +46,31 @@ CarManager::~CarManager()
 }
 
 void CarManager::start(){
-
-  Serial.begin(115200);
-    Serial.println();
-    if(!Serial)
+    carConnect->send(controlData);
+    if(!carIsActive())
+      return;
+    if (!client->connectWifi(connectData->ssid,connectData->password))
     {
-
-      while (!client->connectWifi(connectData->ssid,connectData->password))
-      {
-          Serial.println("Connecting WiFi...");
-      }
-      while (!client->connectApi(connectData->carKey))
-      {
-          Serial.println("Connecting Api...");
-      }
-      Serial.println("Connections Completed!");
-      carConnect->send(controlData);
+      Serial.println("Connction failed");
+      Serial.println(connectData->ssid);
+      Serial.println(connectData->password);
+      return;
+    }
+    if (!client->connectApi(connectData->carKey))
+    {
+      Serial.println("Api Not Found");
+      return;
     }
 }
 
 void  CarManager::control(){
     serialconnector->read();
-    if(Serial)
+    if(!carIsActive())
       return;
+    
     WebData *webData=client->getData(carData);
   if(webData==nullptr)
   {
-    Serial.println("Unsuccesfull");
     movement->move(MovementDirection::PASSIVE);
     return;
   }
@@ -101,17 +105,17 @@ void CarManager::receiveSensorData(){
     carData->batteryPower=sensorData->batteryLevel;
     carData->lightLevel=sensorData->lightLevel;
 }
-ConnectData CarManager::getData(){
-  return *connectData;
+ConnectData *CarManager::getData(){
+  return connectData;
 }
 
-void CarManager::dataChanged(ConnectData data) {
-  this->connectData->carKey=data.carKey;
-  this->connectData->ssid=data.ssid;
-  this->connectData->password=data.password;
+void CarManager::dataChanged(ConnectData *data) {
+  if(this->connectData!=data)
+    delete this->connectData;
+  this->connectData=data;
 }
 void CarManager::save() {
-
+  Serial.println("OK");
 }
 void CarManager::connect() {
     if(client->connectWifi(connectData->ssid,connectData->password))
@@ -126,6 +130,12 @@ void CarManager::connect() {
     Serial.print("\t SSID:");
     Serial.println(connectData->ssid);
 }
-void  CarManager::exit(){
-
+void  CarManager::startMode()
+{
+  this->usbMode=true;
+  digitalWrite(LED_PIN,LOW);
+}
+void  CarManager::restart()
+{
+  ESP.reset();
 }

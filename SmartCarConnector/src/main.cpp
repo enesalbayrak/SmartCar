@@ -1,10 +1,12 @@
 #include <Arduino.h>
 #include<manager/carmanager.h>
- CarManager manager;
+#include<EEPROM.h>
+CarManager manager;
 void setup() {
-   manager.start();
+     manager.start();
+     pinMode(2,OUTPUT);
 }
 
-void loop() {
-   manager.control();
+void loop() { 
+     manager.control();
 }

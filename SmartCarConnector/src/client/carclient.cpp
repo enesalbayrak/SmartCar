@@ -15,7 +15,7 @@ bool  CarClient::connectWifi(String ssid,String password){
     uint8_t count=0;
     while (WiFi.status() != WL_CONNECTED) {
      delay(250);
-     if(count==10)
+     if(count==40)
       return false;
       count++;
     }

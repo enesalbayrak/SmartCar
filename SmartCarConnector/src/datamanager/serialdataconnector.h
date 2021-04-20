@@ -5,7 +5,8 @@ class SerialDataConnector
 {
 private:
     IDataConnector *connector;
-    ConnectData data;
+    ConnectData *data;
+    bool started=false;
 public:
     SerialDataConnector(IDataConnector *connector);
     void read();
