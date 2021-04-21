@@ -14,7 +14,7 @@ char * readEEPROMData(uint16_t &cursor)
     size_t size=EEPROM.read(cursor++);
     if(size== 0)
         return "";
-    char *  values=(char*)calloc(size+2,(sizeof(char)));
+    char *values=(char*)calloc(size+2,(sizeof(char)));
     for (size_t i = 0; i < size; i++)
     {
         values[i]=EEPROM.read(cursor++);

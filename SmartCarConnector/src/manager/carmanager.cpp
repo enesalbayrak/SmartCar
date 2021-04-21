@@ -22,8 +22,6 @@ CarManager::CarManager()
 { 
     Serial.begin(115200);
     Serial.print("\n\n\r");
-    pinMode(LED_PIN,OUTPUT);
-    digitalWrite(LED_PIN,HIGH);
     connectData= this->saver.read();
     this->serialconnector= new SerialDataConnector(this);
      movement= new Movement();

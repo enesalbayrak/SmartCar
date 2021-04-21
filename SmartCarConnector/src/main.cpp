@@ -4,7 +4,6 @@
 CarManager manager;
 void setup() {
      manager.start();
-     pinMode(2,OUTPUT);
 }
 
 void loop() { 

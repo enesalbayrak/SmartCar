@@ -4,7 +4,7 @@
 #include "lighting/lightcontrol.h"
 #include "lightstatus.h"
 #include "loopcontrol.h"
-class CarLighting:public LoopControl
+class CarLighting
 {
 private:
     LightControl *backLight;
@@ -17,7 +17,7 @@ public:
     CarLighting();
     void setLightStatus(LightStatus status);
     LightStatus getLightStatus();
-    void control() override;
+    void control();
 };
 
 #endif

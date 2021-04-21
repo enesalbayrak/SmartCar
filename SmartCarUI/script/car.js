@@ -1,14 +1,19 @@
-function runAndSetInterval(func, time) {
-  func();
-  return setInterval(func, time);
-}
 var webStatus = {
   backDistance: 0,
   frontDistance: 0,
   lightLevel: 40,
 };
 
-//#region  signal
+//#region Hasan
+
+function runAndSetInterval(func, time) {
+  func();
+  return setInterval(func, time);
+}
+
+//#endregion
+
+//#region  signal Hasan
 var signalValues = {
   status: "CLOSE",
   interval: -1,
@@ -134,7 +139,7 @@ document.addEventListener("keydown", (ev) => {
 });
 //#endregion
 
-//#region headlight
+//#region headlight Taner
 var headlightStatus = {
   status: "OFF",
   active: false,
@@ -217,7 +222,7 @@ document.addEventListener("keydown", (ev) => {
 
 //#endregion
 
-//#region  park
+//#region  park Yusuf
 var parkStatus = false;
 function setParkStatus(status) {
   parkStatus = status;
@@ -243,7 +248,7 @@ document.addEventListener("keydown", (ev) => {
 
 //#endregion
 
-//#region  horn
+//#region  horn Yusuf
 var hornStatus = false;
 function setHornStatus(status) {
   hornStatus = status;
@@ -279,7 +284,7 @@ document.addEventListener("keyup", (ev) => {
 });
 //#endregion
 
-//#region direction
+//#region direction Enes
 var directionStatus = {
   front: false,
   back: false,
@@ -497,7 +502,7 @@ document.getElementById("d-rb").addEventListener("mouseup", () => {
 
 //#endregion
 
-//#region connection
+//#region connection Taner
 var time = new Date();
 var newTime;
 var active = false;
@@ -532,4 +537,7 @@ var connect = async () => {
   active = false;
 };
 runAndSetInterval(connect, 50);
+//#endregion
+
+//#region Enes
 //#endregion

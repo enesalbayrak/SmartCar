@@ -11,4 +11,5 @@ public:
     uint16_t readDistance();
     ~Distance();
 };
+
 #endif
