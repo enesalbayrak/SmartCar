@@ -5,7 +5,14 @@
 #define HEADLIGHT_PIN 6
 #define BACKLIGHT_PIN 8
 #define BACK_HEADLIGHT_PIN 9
+#define BUZZER_PIN 7
 
 #define LONG_HEADLIGHT_VALUE 100
 #define SHORT_HEADLIGHT_VALUE 20
+#define LDR_PIN A0
+#define BATTERY_PIN A0
+#define FRONT_TRIG_PIN 2
+#define FRONT_ECHO_PIN 3
+#define BACK_TRIG_PIN 12
+#define BACK_ECHO_PIN 13
 #endif

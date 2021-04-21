@@ -6,7 +6,8 @@ struct CarControlData{
     LightStatusType headLight;
     LightStatusType longHeadLight;
     LightStatusType backLight;
-    BuzzerSignalLevel buzzerLevel;
+    bool parkActivity;
+    bool hornActivity;
 };
 
 struct CarSensorData

@@ -14,8 +14,10 @@ void ModelsLogger::log(CarControlData * data){
     Serial.println(data->longHeadLight);
     Serial.print("signalStatus \t:");
     Serial.println(data->signalStatus);  
-    Serial.print("buzzerLevel \t:");
-    Serial.println(data->buzzerLevel);  
+    Serial.print("parkActivity \t:");
+    Serial.println(data->parkActivity);  
+    Serial.print("hornActivity \t:");
+    Serial.println(data->hornActivity);  
     Serial.println("**********LIGHT DATA END****************");
 }
 

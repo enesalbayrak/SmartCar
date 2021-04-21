@@ -24,8 +24,6 @@ uint8_t Battery::percent(){
     value /=100; 
     double vout = (value * 5.0) / 1024.0; // see text
     double vin = (vout*(1+errorPercent)*(res1+res2)) / res2; 
-    Serial.println(vin);
-    Serial.println(value);
    if(vin<minValue)
     vin=minValue;
     else if(vin>maxValue)

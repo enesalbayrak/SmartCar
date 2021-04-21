@@ -10,7 +10,8 @@ bool equalsCarControlData(CarControlData *d1,CarControlData *d2){
          && d1->headLight==d2->headLight
          && d1->longHeadLight==d2->longHeadLight
          && d1->signalStatus==d2->signalStatus
-         && d1->buzzerLevel==d2->buzzerLevel);
+         && d1->parkActivity==d2->parkActivity
+         && d1->hornActivity==d2->hornActivity);
 }
 
 bool CarManager::carIsActive(){
@@ -37,7 +38,8 @@ CarManager::CarManager()
     controlData->backLight=LightStatusType::LIGHT_CLOSE;
     controlData->headLight=LightStatusType::LIGHT_CLOSE;
     controlData->longHeadLight=LightStatusType::LIGHT_CLOSE;
-    controlData->buzzerLevel=BuzzerSignalLevel::BUZZER_CLOSE;
+    controlData->parkActivity=false;
+    controlData->hornActivity=false;
     controlData->signalStatus=SignalStatusType::SIGNAL_CLOSE;
 }
 
@@ -77,7 +79,8 @@ void  CarManager::control(){
   movement->move(webData->movementDirection);
   CarControlData *newControlData= new CarControlData();
   newControlData->backLight=webData->backLight;
-  newControlData->buzzerLevel=BuzzerSignalLevel::BUZZER_CLOSE;
+  newControlData->parkActivity=webData->parkActivity;
+  newControlData->hornActivity=webData->hornActivity;
   newControlData->headLight=webData->headLight;
   newControlData->longHeadLight=webData->longHeadLight;
   newControlData->signalStatus=webData->signalStatus;

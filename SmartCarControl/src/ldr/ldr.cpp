@@ -10,7 +10,6 @@ Ldr::Ldr(uint8_t pin){
 
 uint8_t Ldr::percent(){
     int value=analogRead(pin);
-    Serial.println(value);
     if(value<LDR_MIN_VALUE)
         value=LDR_MIN_VALUE;
     else if(value>LDR_MAX_VALUE)
