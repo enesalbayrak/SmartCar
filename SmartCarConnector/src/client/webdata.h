@@ -4,12 +4,11 @@
 struct WebData
 {
     MovementDirection movementDirection;
-    LightStatusType headLight;
-    LightStatusType longHeadLight;
+    uint8_t headLightPercent;
     LightStatusType backLight;
+    LightStatusType backHeadLight;
     SignalStatusType signalStatus;
-    bool parkActivity;
-    bool hornActivity;
+    BuzzerSignalLevel buzzerStatus;
 };
 
 #endif

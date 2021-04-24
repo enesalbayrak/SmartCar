@@ -3,11 +3,10 @@
 #include<enums.h>
 struct CarControlData{
     SignalStatusType signalStatus;
-    LightStatusType headLight;
-    LightStatusType longHeadLight;
+    uint8_t headLightPercent;
+    LightStatusType backHeadLight;
     LightStatusType backLight;
-    bool parkActivity;
-    bool hornActivity;
+    BuzzerSignalLevel buzzerStatus;
 };
 
 struct CarSensorData

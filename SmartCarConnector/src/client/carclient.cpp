@@ -56,12 +56,11 @@ WebData * CarClient::getData(CarData *carData){
       deserializeJson(doc,payload);
       WebData * wd= new WebData();
       wd->movementDirection=doc["md"];
-      wd->headLight=doc["hl"];
-      wd->longHeadLight=doc["lh"];
+      wd->headLightPercent=doc["hl"];
+      wd->backHeadLight=doc["bh"];
+      wd->buzzerStatus=doc["bz"];
       wd->backLight=doc["bl"];
       wd->signalStatus=doc["ss"];
-      wd->parkActivity=doc["pr"];
-      wd->hornActivity=doc["hr"];
       // WebDataLogger::log(wd);
       return wd;
     }

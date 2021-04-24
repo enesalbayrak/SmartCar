@@ -5,21 +5,31 @@ namespace SmartCar.Web
 {
     public enum LightStatus
     {
-        Open=1,
-        Close=0
+        Open = 1,
+        Close = 0
     }
 
-    public enum MovementDirection:byte
+    public enum BuzzerStatus
     {
-        Passive=0,
-        FrontLeft= 1,
-        Front= 2,
-        FronRight= 3,
-        AntiClockwise= 4,
-        Clockwise= 5,
-        BackLeft= 6,
-        Back= 7,
-        BackRight= 8
+        Close = 0,
+        Level1 = 1,
+        Level2 = 2,
+        Level3 = 3,
+        Open = 4
+
+    }
+
+    public enum MovementDirection : byte
+    {
+        Passive = 0,
+        FrontLeft = 1,
+        Front = 2,
+        FronRight = 3,
+        AntiClockwise = 4,
+        Clockwise = 5,
+        BackLeft = 6,
+        Back = 7,
+        BackRight = 8
     }
 
     public enum SignalStatus : byte
@@ -27,7 +37,8 @@ namespace SmartCar.Web
         Close = 0,
         Left = 1,
         Right = 2,
-        Quad = 3
+        Quad = 3,
+        Open = 4
     };
 
     public class WebDataModel
@@ -35,17 +46,15 @@ namespace SmartCar.Web
         [JsonPropertyName("md")]
         public MovementDirection MovementDirection { get; set; }
         [JsonPropertyName("hl")]
-        public LightStatus HeadLightStatus { get; set; }
+        public int HeadLightPercent { get; set; }
+        [JsonPropertyName("bh")]
+        public LightStatus BackHeadLight { get; set; }
         [JsonPropertyName("bl")]
         public LightStatus BackLightStatus { get; set; }
-        [JsonPropertyName("lh")]
-        public LightStatus LongHeadLight { get; set; }
         [JsonPropertyName("ss")]
         public SignalStatus SignalStatus { get; set; }
-        [JsonPropertyName("pr")]
-        public bool ParkActivity { get; set; }
-        [JsonPropertyName("hr")]
-        public bool HornActivity { get; set; }
+        [JsonPropertyName("bz")]
+        public BuzzerStatus BuzzerStatus { get; set; }
     }
 
     public class CarDataModel

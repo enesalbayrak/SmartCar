@@ -1,6 +1,5 @@
 #ifndef SIGNALLIGHT_H
 #define SIGNALLIGHT_H
-#include<loopcontrol.h>
 #include<stdint.h>
 class SignalLight
 {

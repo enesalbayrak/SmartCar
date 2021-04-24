@@ -37,10 +37,8 @@ namespace SmartCar.Web.Controllers
                 {
                     MovementDirection = MovementDirection.Passive,
                     BackLightStatus = LightStatus.Close,
-                    HeadLightStatus = LightStatus.Close,
-                    HornActivity = false,
-                    LongHeadLight = LightStatus.Close,
-                    ParkActivity = false,
+                    HeadLightPercent = 0,
+                    BackHeadLight=LightStatus.Close,
                     SignalStatus = SignalStatus.Close,
                 }
             };
@@ -58,13 +56,22 @@ namespace SmartCar.Web.Controllers
             return Ok();
         }
 
+        private CarDataModel controlModel(CarDataModel model,CarDataModel oldModel)
+        {
+            if (model.BackDistance > 2000)
+                model.BackDistance = oldModel.BackDistance;
+            if (model.FrontDistance > 2000)
+                model.FrontDistance = oldModel.BackDistance;
+            return model;
+        }
+
         [HttpPost("car")]
         public ActionResult<WebDataModel> CarRequest([FromBody] CarDataModel model, [FromHeader(Name = "connection-key")] string key)
         {
             var connection = connections.FirstOrDefault(b => b.CarKey == key);
             if (connection == null)
                 connection = CreateCarConnection(key);
-
+            model = controlModel(model, connection.CarModel);
             connection.CarModel = model;
             return Ok(connection.WebModel);
         }

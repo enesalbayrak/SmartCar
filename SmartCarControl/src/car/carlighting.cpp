@@ -4,7 +4,7 @@ CarLighting::CarLighting()
 {
     this->backLight=new LightControl(BACKLIGHT_PIN);
     this->headLight=new LightControl(HEADLIGHT_PIN);
-    this->headLight->open(CLOSE_HEADLIGHT_VALUE);
+    this->headLight->close();
     this->backHeadLight=new LightControl(BACK_HEADLIGHT_PIN);
     this->leftSignal=new SignalLight(SIGNAL_LEFT_PIN);
     this->rightSignal=new SignalLight(SIGNAL_RIGHT_PIN);
@@ -12,31 +12,30 @@ CarLighting::CarLighting()
 
 void CarLighting::setLightStatus(LightStatus status)
 {
-    if(this->status.BackLight!=status.BackLight)
+    if(this->status.backLight!=status.backLight)
     {
-        if(status.BackLight==LightStatusType::LIGHT_OPEN)
+        if(status.backLight==LightStatusType::LIGHT_OPEN)
             backLight->open();
         else
             backLight->close();
     }
 
-    if(this->status.HeadLight!=status.HeadLight||this->status.LongHeadLight!=status.LongHeadLight)
+    if(this->status.backHeadLight!=status.backHeadLight)
     {
-        if(status.HeadLight==LightStatusType::LIGHT_OPEN)
-        {
+        if(status.backHeadLight==LightStatusType::LIGHT_OPEN)
             backHeadLight->open();
-            headLight->open(status.LongHeadLight==LightStatusType::LIGHT_OPEN?LONG_HEADLIGHT_VALUE:SHORT_HEADLIGHT_VALUE);
-        }
         else
-        {
             backHeadLight->close();
-            headLight->open(CLOSE_HEADLIGHT_VALUE);
-        }
+    }
+
+    if(this->status.headLightPercent!=status.headLightPercent)
+    {
+        headLight->open(status.headLightPercent);
     }
     
-    if(this->status.SignalStatus!=status.SignalStatus)
+    if(this->status.signalStatus!=status.signalStatus)
     {
-        switch (status.SignalStatus)
+        switch (status.signalStatus)
         {
         case SIGNAL_QUAD:
             leftSignal->start();

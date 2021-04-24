@@ -9,15 +9,11 @@ void WebDataLogger::log(WebData *data){
     Serial.print("BackLight:");
     Serial.println(data->backLight);
     Serial.print("headLight:");
-    Serial.println(data->headLight);
-    Serial.print("longHeadLight:");
-    Serial.println(data->longHeadLight);
+    Serial.println(data->headLightPercent);
+    Serial.print("Buzzer:");
+    Serial.println(data->buzzerStatus);
     Serial.print("hornActivity:");
-    Serial.println(data->hornActivity);
-    Serial.print("movementDirection:");
     Serial.println(data->movementDirection);
-    Serial.print("parkActivity:");
-    Serial.println(data->parkActivity);
     Serial.print("signalStatus:");
     Serial.println(data->signalStatus);
     Serial.println("**************WEB DATA END**************");

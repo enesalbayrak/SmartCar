@@ -1,9 +1,8 @@
 #ifndef BUZZERSIGNAL_H
 #define BUZZERSIGNAL_H
 #include<stdint.h>
-#include<loopcontrol.h>
 #include<enums.h>
-class BuzzerSignal:public LoopControl
+class BuzzerSignal
 {
 private:
     uint8_t pinAddress;
@@ -16,7 +15,7 @@ private:
 public:
     BuzzerSignal(uint8_t pinAddress);
     void setLevel(BuzzerSignalLevel level);
-    void control() override;
+    void control();
 };
 
 #endif

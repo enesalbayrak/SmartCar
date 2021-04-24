@@ -50,10 +50,17 @@
                   </button>
                 </td>
               </tr>
-              <tr class="headlight-l">
+              <tr>
                 <td colspan="3" align="center">
                   <button id="headlight-long">
                     <img src="imgs/headlightL.svg" />
+                  </button>
+                </td>
+              </tr>
+              <tr class="headlight-l">
+                <td colspan="3" align="center">
+                  <button id="settings">
+                    <img src="imgs/settings.svg" />
                   </button>
                 </td>
               </tr>
@@ -138,11 +145,17 @@
             <table class="distance-table">
               <tr>
                 <td class="left">
-                  <span class="digit distance-value left">012</span>
+                  <span
+                    id="back-distance-value"
+                    class="digit distance-value left"
+                    >012</span
+                  >
                   <span class="digit">cm</span>
                 </td>
                 <td class="right">
-                  <span class="digit distance-value">015</span>
+                  <span id="front-distance-value" class="digit distance-value"
+                    >015</span
+                  >
                   <span class="digit">cm</span>
                 </td>
               </tr>
@@ -172,7 +185,7 @@
                   <img id="battery-lamb" src="imgs/battery3.svg" />
                 </td>
                 <td class="center">
-                  <img src="imgs/nightopem.svg" />
+                  <img id="night-lamp" src="imgs/nightclose.svg" />
                 </td>
                 <td class="center">
                   <img id="signal-right-lamp" src="imgs/signalclose.svg" />
@@ -183,22 +196,64 @@
         </tr>
       </table>
     </div>
-    <div>
+    <div id="settings-panel" class="setting-panel">
       <table>
         <tr>
+          <td>Car Key</td>
+          <td>
+            <input type="text" />
+          </td>
+        </tr>
+        <tr>
+          <td>Night Mode Max Level</td>
           <td>
             <input type="number" min="0" value="50" />
           </td>
+        </tr>
+        <tr>
+          <td>Buzzer Open CM</td>
           <td>
-            <input type="number" min="0" value="75" />
+            <input type="number" min="0" value="50" />
           </td>
+        </tr>
+        <tr>
+          <td>Buzzer Level 3 CM</td>
           <td>
-            <input type="number" min="0" value="150" />
+            <input type="number" min="0" value="50" />
           </td>
+        </tr>
+        <tr>
+          <td>Buzzer Level 2 CM</td>
+          <td>
+            <input type="number" min="0" value="50" />
+          </td>
+        </tr>
+        <tr>
+          <td>Buzzer Level 1 CM</td>
           <td>
             <input type="number" min="0" value="200" />
           </td>
-          <td><button>Kaydet</button></td>
+        </tr>
+        <tr>
+          <td>Headlight Closed Percent</td>
+          <td>
+            <input type="number" min="0" value="100" />
+          </td>
+        </tr>
+        <tr>
+          <td>Hedlight Opened Percent</td>
+          <td>
+            <input type="number" min="0" value="100" />
+          </td>
+        </tr>
+        <tr>
+          <td>Long Headlight Percent</td>
+          <td>
+            <input type="number" min="0" value="100" />
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2"><button>Close</button><button>Save</button></td>
         </tr>
       </table>
     </div>

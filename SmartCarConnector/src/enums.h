@@ -11,7 +11,8 @@ enum SignalStatusType:uint8_t{
     SIGNAL_CLOSE=0,
     SIGNAL_LEFT=1,
     SIGNAL_RIGHT=2,
-    SIGNAL_QUAD=3
+    SIGNAL_QUAD=3,
+    SIGNAL_OPEN=4
 };
 
 enum BuzzerSignalLevel:uint8_t{

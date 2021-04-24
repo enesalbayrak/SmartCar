@@ -14,5 +14,7 @@ uint8_t Ldr::percent(){
         value=LDR_MIN_VALUE;
     else if(value>LDR_MAX_VALUE)
         value=LDR_MAX_VALUE;
-    return map(value,LDR_MIN_VALUE,LDR_MAX_VALUE,0,100);
+    double x=((float)value)/LDR_MAX_VALUE;
+    double y=sqrt(1-pow(x-1,2));
+    return round(y*100);
 }

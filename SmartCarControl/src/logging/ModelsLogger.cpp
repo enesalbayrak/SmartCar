@@ -9,15 +9,11 @@ void ModelsLogger::log(CarControlData * data){
     Serial.print("backLight \t:");
     Serial.println(data->backLight);
     Serial.print("headLight \t:");
-    Serial.println(data->headLight);  
-    Serial.print("longHeadLight \t:");
-    Serial.println(data->longHeadLight);
+    Serial.println(data->headLightPercent);  
+    Serial.print("buzzerStatus \t:");
+    Serial.println(data->buzzerStatus);
     Serial.print("signalStatus \t:");
     Serial.println(data->signalStatus);  
-    Serial.print("parkActivity \t:");
-    Serial.println(data->parkActivity);  
-    Serial.print("hornActivity \t:");
-    Serial.println(data->hornActivity);  
     Serial.println("**********LIGHT DATA END****************");
 }
 

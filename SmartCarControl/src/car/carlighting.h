@@ -3,7 +3,6 @@
 #include "lighting/signallight.h"
 #include "lighting/lightcontrol.h"
 #include "lightstatus.h"
-#include "loopcontrol.h"
 class CarLighting
 {
 private:

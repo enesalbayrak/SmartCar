@@ -5,7 +5,7 @@
 #include <ldr/ldr.h>
 #include <battery/battery.h>
 #include <distance/distance.h>
-#include"voice/voicemanager.h"
+#include <voice/buzersignal.h>
 class CarManager:IDataManager
 {
 private:
@@ -14,7 +14,7 @@ private:
     Battery *battery;
     Distance *backDistance;
     Distance *frontDistance;
-    VoiceManager * voiceManager;
+    BuzzerSignal * buzzer;
 public:
     void bindData(CarControlData *data) override;
     CarSensorData *getData() override;

@@ -1,8 +1,13 @@
 var webStatus = {
   backDistance: 0,
   frontDistance: 0,
-  lightLevel: 40,
+  lightLevel: 0,
+  batteryPower: 40,
 };
+
+document.getElementById("settings").addEventListener("click", () => {
+  document.getElementById("settings-panel").classList.add("open");
+});
 
 //#region Hasan
 
@@ -140,10 +145,28 @@ document.addEventListener("keydown", (ev) => {
 //#endregion
 
 //#region headlight Taner
+
+var settings = {
+  carKey: "12345678",
+  nightMaxValue: 30,
+  buzzOpen: 5,
+  buzz3: 8,
+  buzz2: 12,
+  buzz1: 15,
+  headLightClose: 5,
+  headLightOpen: 10,
+  headLightLong: 100,
+};
+
 var headlightStatus = {
   status: "OFF",
   active: false,
   long: false,
+  getHeadLightPercent: () => {
+    if (!headlightStatus.active) return settings.headLightClose;
+    if (headlightStatus.long) return settings.headLightLong;
+    return settings.headLightOpen;
+  },
 };
 function setHeadlightStyles() {
   if (headlightStatus.long)
@@ -183,7 +206,7 @@ function setLongHeadlight(status) {
 function setHeadlight(status) {
   headlightStatus.status = status;
   if (status == "ON") headlightStatus.active = true;
-  else if (status == "AUTO" && webStatus.lightLevel <= 30)
+  else if (status == "AUTO" && webStatus.lightLevel <= settings.nightMaxValue)
     headlightStatus.active = true;
   else headlightStatus.active = false;
   setHeadlightStyles();
@@ -262,11 +285,7 @@ function setHornStatus(status) {
 document.getElementById("horn").addEventListener("mousedown", () => {
   setHornStatus(true);
 });
-document.getElementById("horn").addEventListener("mouseup", () => {
-  setHornStatus(false);
-});
-
-document.getElementById("horn").addEventListener("mouseleave", () => {
+document.addEventListener("mouseup", () => {
   setHornStatus(false);
 });
 
@@ -282,6 +301,19 @@ document.addEventListener("keyup", (ev) => {
       setHornStatus(false);
   }
 });
+
+function getBuzzerStatus() {
+  if (hornStatus) return 4;
+  if (!parkStatus) return 0;
+  var minDistance = Math.min(webStatus.backDistance, webStatus.frontDistance);
+
+  if (minDistance <= settings.buzzOpen) return 4;
+  if (minDistance <= settings.buzz3) return 3;
+  if (minDistance <= settings.buzz2) return 2;
+  if (minDistance <= settings.buzz1) return 1;
+  return 0;
+}
+
 //#endregion
 
 //#region direction Enes
@@ -290,6 +322,7 @@ var directionStatus = {
   back: false,
   left: false,
   right: false,
+  position: 0,
 };
 
 function setDirectionStyle() {
@@ -302,6 +335,7 @@ function setDirectionStyle() {
     document.getElementById("d-lb").classList.remove("active");
     document.getElementById("d-b").classList.remove("active");
     document.getElementById("d-rb").classList.remove("active");
+    directionStatus.position = 1;
   } else if (directionStatus.front && directionStatus.right) {
     document.getElementById("d-lf").classList.remove("active");
     document.getElementById("d-f").classList.remove("active");
@@ -311,6 +345,7 @@ function setDirectionStyle() {
     document.getElementById("d-lb").classList.remove("active");
     document.getElementById("d-b").classList.remove("active");
     document.getElementById("d-rb").classList.remove("active");
+    directionStatus.position = 3;
   } else if (directionStatus.back && directionStatus.left) {
     document.getElementById("d-lf").classList.remove("active");
     document.getElementById("d-f").classList.remove("active");
@@ -320,6 +355,7 @@ function setDirectionStyle() {
     document.getElementById("d-lb").classList.add("active");
     document.getElementById("d-b").classList.remove("active");
     document.getElementById("d-rb").classList.remove("active");
+    directionStatus.position = 6;
   } else if (directionStatus.back && directionStatus.right) {
     document.getElementById("d-lf").classList.remove("active");
     document.getElementById("d-f").classList.remove("active");
@@ -329,6 +365,7 @@ function setDirectionStyle() {
     document.getElementById("d-lb").classList.remove("active");
     document.getElementById("d-b").classList.remove("active");
     document.getElementById("d-rb").classList.add("active");
+    directionStatus.position = 8;
   } else if (directionStatus.front) {
     document.getElementById("d-lf").classList.remove("active");
     document.getElementById("d-f").classList.add("active");
@@ -338,6 +375,7 @@ function setDirectionStyle() {
     document.getElementById("d-lb").classList.remove("active");
     document.getElementById("d-b").classList.remove("active");
     document.getElementById("d-rb").classList.remove("active");
+    directionStatus.position = 2;
   } else if (directionStatus.left) {
     document.getElementById("d-lf").classList.remove("active");
     document.getElementById("d-f").classList.remove("active");
@@ -347,6 +385,7 @@ function setDirectionStyle() {
     document.getElementById("d-lb").classList.remove("active");
     document.getElementById("d-b").classList.remove("active");
     document.getElementById("d-rb").classList.remove("active");
+    directionStatus.position = 4;
   } else if (directionStatus.right) {
     document.getElementById("d-lf").classList.remove("active");
     document.getElementById("d-f").classList.remove("active");
@@ -356,6 +395,7 @@ function setDirectionStyle() {
     document.getElementById("d-lb").classList.remove("active");
     document.getElementById("d-b").classList.remove("active");
     document.getElementById("d-rb").classList.remove("active");
+    directionStatus.position = 5;
   } else if (directionStatus.back) {
     document.getElementById("d-lf").classList.remove("active");
     document.getElementById("d-f").classList.remove("active");
@@ -365,6 +405,7 @@ function setDirectionStyle() {
     document.getElementById("d-lb").classList.remove("active");
     document.getElementById("d-b").classList.add("active");
     document.getElementById("d-rb").classList.remove("active");
+    directionStatus.position = 7;
   } else {
     document.getElementById("d-lf").classList.remove("active");
     document.getElementById("d-f").classList.remove("active");
@@ -374,6 +415,7 @@ function setDirectionStyle() {
     document.getElementById("d-lb").classList.remove("active");
     document.getElementById("d-b").classList.remove("active");
     document.getElementById("d-rb").classList.remove("active");
+    directionStatus.position = 0;
   }
 }
 document.addEventListener("keydown", (ev) => {
@@ -425,29 +467,14 @@ document.getElementById("d-lf").addEventListener("mousedown", () => {
   directionStatus.front = true;
   setDirectionStyle();
 });
-document.getElementById("d-lf").addEventListener("mouseup", () => {
-  directionStatus.left = false;
-  directionStatus.front = false;
-  setDirectionStyle();
-});
 
 document.getElementById("d-f").addEventListener("mousedown", () => {
   directionStatus.front = true;
   setDirectionStyle();
 });
-document.getElementById("d-f").addEventListener("mouseup", () => {
-  directionStatus.front = false;
-  setDirectionStyle();
-});
-
 document.getElementById("d-rf").addEventListener("mousedown", () => {
   directionStatus.right = true;
   directionStatus.front = true;
-  setDirectionStyle();
-});
-document.getElementById("d-rf").addEventListener("mouseup", () => {
-  directionStatus.right = false;
-  directionStatus.front = false;
   setDirectionStyle();
 });
 
@@ -455,17 +482,9 @@ document.getElementById("d-l").addEventListener("mousedown", () => {
   directionStatus.left = true;
   setDirectionStyle();
 });
-document.getElementById("d-l").addEventListener("mouseup", () => {
-  directionStatus.left = false;
-  setDirectionStyle();
-});
 
 document.getElementById("d-r").addEventListener("mousedown", () => {
   directionStatus.right = true;
-  setDirectionStyle();
-});
-document.getElementById("d-r").addEventListener("mouseup", () => {
-  directionStatus.right = false;
   setDirectionStyle();
 });
 
@@ -474,18 +493,9 @@ document.getElementById("d-lb").addEventListener("mousedown", () => {
   directionStatus.back = true;
   setDirectionStyle();
 });
-document.getElementById("d-lb").addEventListener("mouseup", () => {
-  directionStatus.left = false;
-  directionStatus.back = false;
-  setDirectionStyle();
-});
 
 document.getElementById("d-b").addEventListener("mousedown", () => {
   directionStatus.back = true;
-  setDirectionStyle();
-});
-document.getElementById("d-b").addEventListener("mouseup", () => {
-  directionStatus.back = false;
   setDirectionStyle();
 });
 
@@ -494,8 +504,10 @@ document.getElementById("d-rb").addEventListener("mousedown", () => {
   directionStatus.back = true;
   setDirectionStyle();
 });
-document.getElementById("d-rb").addEventListener("mouseup", () => {
+document.addEventListener("mouseup", () => {
   directionStatus.right = false;
+  directionStatus.left = false;
+  directionStatus.front = false;
   directionStatus.back = false;
   setDirectionStyle();
 });
@@ -503,6 +515,25 @@ document.getElementById("d-rb").addEventListener("mouseup", () => {
 //#endregion
 
 //#region connection Taner
+function bindServerData() {
+  document.getElementById("back-distance-value").innerHTML =
+    webStatus.backDistance;
+  document.getElementById("front-distance-value").innerHTML =
+    webStatus.frontDistance;
+  setHeadlight(headlightStatus.status);
+
+  document.getElementById("night-lamp").src =
+    webStatus.lightLevel > settings.nightMaxValue
+      ? "imgs/nightclose.svg"
+      : "imgs/nightopen.svg";
+  var batteryLevelImage;
+  if (webStatus.batteryPower < 10) batteryLevelImage = 0;
+  else if (webStatus.batteryPower < 40) batteryLevelImage = 1;
+  else if (webStatus.batteryPower < 70) batteryLevelImage = 2;
+  else batteryLevelImage = 3;
+  document.getElementById("battery-lamb").src =
+    "imgs/battery" + batteryLevelImage + ".svg";
+}
 var time = new Date();
 var newTime;
 var active = false;
@@ -518,19 +549,24 @@ var connect = async () => {
     var result = await fetch("http://192.168.1.26:5000/api/web", {
       method: "POST",
       headers: {
-        "connection-key": "12345678",
+        "connection-key": settings.carKey,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        md: 0,
-        hl: headlightStatus.active ? 1 : 0,
-        bl: 0,
-        lh: headlightStatus.long ? 1 : 0,
+        md: directionStatus.position,
+        hl: headlightStatus.getHeadLightPercent(),
+        bh: headlightStatus.active ? 1 : 0,
+        bl: [6, 7, 8].indexOf(directionStatus.position) >= 0 ? 1 : 0,
         ss: signalStatus.getStatusValue(),
-        pr: true,
-        hr: true,
+        bz: getBuzzerStatus(),
       }),
     });
+    result = await result.json();
+    webStatus.lightLevel = result.ll;
+    webStatus.backDistance = Math.round(result.bd / 10);
+    webStatus.frontDistance = Math.round(result.fd / 10);
+    webStatus.batteryPower = result.bp;
+    bindServerData();
   } catch (error) {
     console.error(error);
   }

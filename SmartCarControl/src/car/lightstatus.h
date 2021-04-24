@@ -4,10 +4,10 @@
 
 struct LightStatus
 {
-    LightStatusType HeadLight;
-    LightStatusType LongHeadLight;
-    LightStatusType BackLight;
-    SignalStatusType SignalStatus;
+    uint8_t headLightPercent;
+    LightStatusType backHeadLight;
+    LightStatusType backLight;
+    SignalStatusType signalStatus;
 };
 
 #endif

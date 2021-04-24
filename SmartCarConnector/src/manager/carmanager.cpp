@@ -3,15 +3,13 @@
 #define SSID  "SUPERONLINE_WiFi_3314"
 #define PASSWORD  "LH7YX4LAYHHP"
 #define CAR_KEY "12345678"
-#define MIN_RECEIVE_MS 7000
+#define MIN_RECEIVE_MS 500
 #define LED_PIN 2
 bool equalsCarControlData(CarControlData *d1,CarControlData *d2){
     return (d1->backLight==d2->backLight
-         && d1->headLight==d2->headLight
-         && d1->longHeadLight==d2->longHeadLight
-         && d1->signalStatus==d2->signalStatus
-         && d1->parkActivity==d2->parkActivity
-         && d1->hornActivity==d2->hornActivity);
+         && d1->headLightPercent==d2->headLightPercent
+         && d1->buzzerStatus==d2->buzzerStatus
+         && d1->signalStatus==d2->signalStatus);
 }
 
 bool CarManager::carIsActive(){
@@ -34,10 +32,8 @@ CarManager::CarManager()
     carData->lightLevel=0;
     controlData= new CarControlData();
     controlData->backLight=LightStatusType::LIGHT_CLOSE;
-    controlData->headLight=LightStatusType::LIGHT_CLOSE;
-    controlData->longHeadLight=LightStatusType::LIGHT_CLOSE;
-    controlData->parkActivity=false;
-    controlData->hornActivity=false;
+    controlData->headLightPercent=0;
+    controlData->buzzerStatus=BuzzerSignalLevel::BUZZER_CLOSE;
     controlData->signalStatus=SignalStatusType::SIGNAL_CLOSE;
 }
 
@@ -77,10 +73,9 @@ void  CarManager::control(){
   movement->move(webData->movementDirection);
   CarControlData *newControlData= new CarControlData();
   newControlData->backLight=webData->backLight;
-  newControlData->parkActivity=webData->parkActivity;
-  newControlData->hornActivity=webData->hornActivity;
-  newControlData->headLight=webData->headLight;
-  newControlData->longHeadLight=webData->longHeadLight;
+  newControlData->headLightPercent=webData->headLightPercent;
+  newControlData->buzzerStatus=webData->buzzerStatus;
+  newControlData->backHeadLight=webData->backHeadLight;
   newControlData->signalStatus=webData->signalStatus;
   if(!equalsCarControlData(controlData,newControlData))
   {
@@ -101,8 +96,8 @@ void CarManager::receiveSensorData(){
         return;
     lastMillis=ms;
     CarSensorData *sensorData= carConnect->receive();
-    carData->backDistance=sensorData->backDistance;
-    carData->frontDistance=sensorData->frontDistance;
+      carData->backDistance=sensorData->backDistance;
+      carData->frontDistance=sensorData->frontDistance;
     carData->batteryPower=sensorData->batteryLevel;
     carData->lightLevel=sensorData->lightLevel;
 }

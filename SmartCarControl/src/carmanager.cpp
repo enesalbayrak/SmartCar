@@ -10,14 +10,12 @@ CarManager::CarManager()
     this->battery= new Battery(BATTERY_PIN);
     this->backDistance=new Distance(BACK_ECHO_PIN,BACK_TRIG_PIN);
     this->frontDistance=new Distance(FRONT_ECHO_PIN,FRONT_TRIG_PIN);
-    this->voiceManager= new VoiceManager(BUZZER_PIN);
+    this->buzzer= new BuzzerSignal(BUZZER_PIN);
     CarConnect::connect(this);
 }
 void CarManager::loop(){
   carLights->control();
-  if(voiceManager->getParkActivity())
-  voiceManager->set(backDistance->readDistance(),frontDistance->readDistance());
-  voiceManager->control();
+  buzzer->control();
 }
 
 CarSensorData *CarManager::getData(){
@@ -31,10 +29,10 @@ CarSensorData *CarManager::getData(){
 
 void CarManager::bindData(CarControlData *data){
   LightStatus status;
-  status.BackLight=data->backLight;
-  status.HeadLight=data->headLight;
-  status.SignalStatus=data->signalStatus;
-  status.LongHeadLight=data->longHeadLight;
+  status.backLight=data->backLight;
+  status.headLightPercent=data->headLightPercent;
+  status.backHeadLight=data->backHeadLight;
+  status.signalStatus=data->signalStatus;
   this->carLights->setLightStatus(status);
-  this->voiceManager->set(data->parkActivity,data->hornActivity, backDistance->readDistance(),frontDistance->readDistance());
+  this->buzzer->setLevel(data->buzzerStatus);
 }
