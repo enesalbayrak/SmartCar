@@ -3,7 +3,7 @@
 #include <esp8266httpclient.h>
 #include <ArduinoJson.h>
 #include <logging/webdatalogger.h>
-#define CAR_API_ENDPOINT "http://192.168.1.26:5000/api/car"
+#define CAR_API_ENDPOINT "http://api.kousmartcar.online/api/car"
 
  CarClient::CarClient(){
 }

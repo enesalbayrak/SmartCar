@@ -5,7 +5,49 @@ var webStatus = {
   batteryPower: 40,
 };
 
+var settings = {
+  carKey: "12345678",
+  nightMaxValue: 30,
+  buzzOpen: 5,
+  buzz3: 10,
+  buzz2: 15,
+  buzz1: 20,
+  headLightClose: 5,
+  headLightOpen: 10,
+  headLightLong: 100,
+};
+if (localStorage.getItem("settings"))
+  settings = JSON.parse(localStorage.getItem("settings"));
+else localStorage.setItem("settings", JSON.stringify(settings));
+
 document.getElementById("settings").addEventListener("click", () => {
+  document.getElementById("ck-input").value = settings.carKey;
+  document.getElementById("nmm-input").value = settings.nightMaxValue;
+  document.getElementById("bzo-input").value = settings.buzzOpen;
+  document.getElementById("bz3-input").value = settings.buzz3;
+  document.getElementById("bz2-input").value = settings.buzz2;
+  document.getElementById("bz1-input").value = settings.buzz1;
+  document.getElementById("hlc-input").value = settings.headLightClose;
+  document.getElementById("hlo-input").value = settings.headLightOpen;
+  document.getElementById("llh-input").value = settings.headLightLong;
+  document.getElementById("settings-panel").classList.add("open");
+});
+
+document.getElementById("close-button").addEventListener("click", () => {
+  document.getElementById("settings-panel").classList.remove("open");
+});
+
+document.getElementById("save-button").addEventListener("click", () => {
+  settings.carKey = document.getElementById("ck-input").value;
+  settings.nightMaxValue = document.getElementById("nmm-input").value;
+  settings.buzzOpen = document.getElementById("bzo-input").value;
+  settings.buzz3 = document.getElementById("bz3-input").value;
+  settings.buzz2 = document.getElementById("bz2-input").value;
+  settings.buzz1 = document.getElementById("bz1-input").value;
+  settings.headLightClose = document.getElementById("hlc-input").value;
+  settings.headLightOpen = document.getElementById("hlo-input").value;
+  settings.headLightLong = document.getElementById("llh-input").value;
+  localStorage.setItem("settings", JSON.stringify(settings));
   document.getElementById("settings-panel").classList.add("open");
 });
 
@@ -145,19 +187,6 @@ document.addEventListener("keydown", (ev) => {
 //#endregion
 
 //#region headlight Taner
-
-var settings = {
-  carKey: "12345678",
-  nightMaxValue: 30,
-  buzzOpen: 5,
-  buzz3: 8,
-  buzz2: 12,
-  buzz1: 15,
-  headLightClose: 5,
-  headLightOpen: 10,
-  headLightLong: 100,
-};
-
 var headlightStatus = {
   status: "OFF",
   active: false,
@@ -546,7 +575,7 @@ var connect = async () => {
   active = true;
   time = newTime;
   try {
-    var result = await fetch("http://192.168.1.26:5000/api/web", {
+    var result = await fetch("http://api.kousmartcar.online/api/web", {
       method: "POST",
       headers: {
         "connection-key": settings.carKey,
