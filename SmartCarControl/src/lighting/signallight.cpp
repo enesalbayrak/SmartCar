@@ -15,6 +15,12 @@ void SignalLight::start(){
     lightStatus=firstHigh?HIGH:LOW;
 }
 
+void SignalLight::open(){
+    active=false;
+    digitalWrite(pinAddress,HIGH);
+}
+
+
 void SignalLight::stop(){
     active=false;
     digitalWrite(pinAddress,LOW);

@@ -6,6 +6,7 @@ class SignalLight
  #define DEFAULT_SIGNAL_TIME 500
     public:
     SignalLight(uint8_t pinAddress,uint16_t lowTime=DEFAULT_SIGNAL_TIME,uint16_t highTime=DEFAULT_SIGNAL_TIME,bool firstHigh=true);
+    void open();
     void start();
     void stop();
     void control();

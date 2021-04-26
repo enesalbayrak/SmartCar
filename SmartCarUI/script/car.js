@@ -543,6 +543,16 @@ document.addEventListener("mouseup", () => {
 
 //#endregion
 
+//#region battery warn
+var batteryWarnStatus = false;
+document.getElementById("empty-battery").addEventListener("click", () => {
+  batteryWarnStatus = !batteryWarnStatus;
+  if (batteryWarnStatus)
+    document.getElementById("empty-battery").classList.add("active");
+  else document.getElementById("empty-battery").classList.remove("active");
+});
+//#endregion
+
 //#region connection Taner
 function bindServerData() {
   document.getElementById("back-distance-value").innerHTML =
@@ -586,7 +596,7 @@ var connect = async () => {
         hl: headlightStatus.getHeadLightPercent(),
         bh: headlightStatus.active ? 1 : 0,
         bl: [6, 7, 8].indexOf(directionStatus.position) >= 0 ? 1 : 0,
-        ss: signalStatus.getStatusValue(),
+        ss: batteryWarnStatus ? 4 : signalStatus.getStatusValue(),
         bz: getBuzzerStatus(),
       }),
     });

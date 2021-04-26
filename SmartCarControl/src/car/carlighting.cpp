@@ -32,11 +32,14 @@ void CarLighting::setLightStatus(LightStatus status)
     {
         headLight->open(status.headLightPercent);
     }
-    
     if(this->status.signalStatus!=status.signalStatus)
     {
         switch (status.signalStatus)
         {
+        case SIGNAL_OPEN:
+        leftSignal->open();
+        rightSignal->open();
+        break;
         case SIGNAL_QUAD:
             leftSignal->start();
             rightSignal->start();
