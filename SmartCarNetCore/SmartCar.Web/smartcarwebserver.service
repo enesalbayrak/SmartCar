@@ -3,6 +3,7 @@ Description=Run NET Server
 
 
 [Service]
+User=root
 ExecStart=/home/ubuntu/SmartCar/SmartCarNetCore/SmartCar.Web/run.sh
 
 [Install]
