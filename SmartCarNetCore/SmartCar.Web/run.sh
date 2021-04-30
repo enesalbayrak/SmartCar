@@ -1,1 +1,1 @@
-﻿dotnet run --urls=http://0.0.0.0:80
+﻿sudo dotnet run --urls=http://0.0.0.0:80
