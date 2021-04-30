@@ -1,0 +1,9 @@
+﻿[Unit]
+Description=Run NET Server
+
+
+[Service]
+ExecStart=/home/ubuntu/SmartCar/SmartCarNetCore/SmartCar.Web/run.sh
+
+[Install]
+WantedBy=default.target
