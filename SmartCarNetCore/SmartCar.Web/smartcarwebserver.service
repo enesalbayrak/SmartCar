@@ -4,7 +4,10 @@ Description=Run NET Server
 
 [Service]
 User=root
+WorkingDirectory=/home/ubuntu/SmartCar/SmartCarNetCore/SmartCar.Web
 ExecStart=/home/ubuntu/SmartCar/SmartCarNetCore/SmartCar.Web/run.sh
+Restart=always
+RestartSec=5
 
 [Install]
-WantedBy=default.target
+WantedBy=multi-user.target
