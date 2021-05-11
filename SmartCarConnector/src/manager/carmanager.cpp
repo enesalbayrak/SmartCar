@@ -111,6 +111,7 @@ void CarManager::dataChanged(ConnectData *data) {
   this->connectData=data;
 }
 void CarManager::save() {
+  saver.write(connectData);
   Serial.println("OK");
 }
 void CarManager::connect() {
