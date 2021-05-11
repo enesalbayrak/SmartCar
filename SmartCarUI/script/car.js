@@ -573,17 +573,11 @@ function bindServerData() {
   document.getElementById("battery-lamb").src =
     "imgs/battery" + batteryLevelImage + ".svg";
 }
-var time = new Date();
-var newTime;
+
 var active = false;
 var connect = async () => {
-  newTime = new Date();
-  if (newTime - time < 100) {
-    return;
-  }
   if (active) return;
   active = true;
-  time = newTime;
   try {
     var result = await fetch("http://api.kousmartcar.online/api/web", {
       method: "POST",

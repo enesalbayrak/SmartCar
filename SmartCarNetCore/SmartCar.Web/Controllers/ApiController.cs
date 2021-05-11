@@ -61,7 +61,7 @@ namespace SmartCar.Web.Controllers
             if (model.BackDistance > 2000)
                 model.BackDistance = oldModel.BackDistance;
             if (model.FrontDistance > 2000)
-                model.FrontDistance = oldModel.BackDistance;
+                model.FrontDistance = oldModel.FrontDistance;
             return model;
         }
 

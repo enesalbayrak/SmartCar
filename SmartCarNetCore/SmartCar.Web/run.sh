@@ -1,0 +1,1 @@
+﻿dotnet -p /home/ubuntu/SmartCar/SmartCarNetCore/SmartCar.Web run --urls=http://0.0.0.0:80
