@@ -5,6 +5,12 @@
 html {
   margin-top: -60px;
 }
+/* On screens that are 600px or less, set the background color to olive */
+@media screen and (max-width: 600px) {
+  body {
+    zoom: 0.9;
+  }
+}
 body {
   background-color: rgb(31, 31, 31);
   color: aliceblue;

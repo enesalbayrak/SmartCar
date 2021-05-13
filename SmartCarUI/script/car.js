@@ -167,6 +167,23 @@ document.getElementById("signal-quad").addEventListener("click", () => {
   setSignalStatus(signalStatus.quad ? "QUADCLOSE" : "QUAD");
 });
 
+document.getElementById("signal-left").addEventListener("touchstart", (ev) => {
+  ev.preventDefault();
+  setSignalStatus(signalStatus.signal == "LEFT" ? "CLOSE" : "LEFT");
+});
+document.getElementById("signal-right").addEventListener("touchstart", (ev) => {
+  ev.preventDefault();
+  setSignalStatus(signalStatus.signal == "RIGHT" ? "CLOSE" : "RIGHT");
+});
+document.getElementById("signal-close").addEventListener("touchstart", (ev) => {
+  ev.preventDefault();
+  setSignalStatus("CLOSE");
+});
+document.getElementById("signal-quad").addEventListener("touchstart", (ev) => {
+  ev.preventDefault();
+  setSignalStatus(signalStatus.quad ? "QUADCLOSE" : "QUAD");
+});
+
 document.addEventListener("keydown", (ev) => {
   switch (ev.key.toLowerCase()) {
     case "e":
@@ -255,6 +272,30 @@ document.getElementById("headlight-auto").addEventListener("click", () => {
   setHeadlight("AUTO");
 });
 
+document
+  .getElementById("headlight-long")
+  .addEventListener("touchstart", (ev) => {
+    ev.preventDefault();
+    setLongHeadlight(!headlightStatus.long);
+  });
+
+document.getElementById("headlight-on").addEventListener("touchstart", (ev) => {
+  ev.preventDefault();
+  setHeadlight("ON");
+});
+document
+  .getElementById("headlight-off")
+  .addEventListener("touchstart", (ev) => {
+    ev.preventDefault();
+    setHeadlight("OFF");
+  });
+document
+  .getElementById("headlight-auto")
+  .addEventListener("touchstart", (ev) => {
+    ev.preventDefault();
+    setHeadlight("AUTO");
+  });
+
 document.addEventListener("keydown", (ev) => {
   switch (ev.key.toLowerCase()) {
     case "f":
@@ -290,6 +331,10 @@ function setParkStatus(status) {
 document.getElementById("park").addEventListener("click", () => {
   setParkStatus(!parkStatus);
 });
+document.getElementById("park").addEventListener("touchstart", (ev) => {
+  ev.preventDefault();
+  setParkStatus(!parkStatus);
+});
 
 document.addEventListener("keydown", (ev) => {
   switch (ev.key.toLowerCase()) {
@@ -314,6 +359,17 @@ function setHornStatus(status) {
 document.getElementById("horn").addEventListener("mousedown", () => {
   setHornStatus(true);
 });
+
+document.getElementById("horn").addEventListener("touchstart", (ev) => {
+  ev.preventDefault();
+  setHornStatus(true);
+});
+
+document.addEventListener("touchend", (ev) => {
+  ev.preventDefault();
+  setHornStatus(false);
+});
+
 document.addEventListener("mouseup", () => {
   setHornStatus(false);
 });
@@ -533,7 +589,69 @@ document.getElementById("d-rb").addEventListener("mousedown", () => {
   directionStatus.back = true;
   setDirectionStyle();
 });
+
 document.addEventListener("mouseup", () => {
+  directionStatus.right = false;
+  directionStatus.left = false;
+  directionStatus.front = false;
+  directionStatus.back = false;
+  setDirectionStyle();
+});
+
+document.getElementById("d-lf").addEventListener("touchstart", (ev) => {
+  ev.preventDefault();
+  directionStatus.left = true;
+  directionStatus.front = true;
+  setDirectionStyle();
+});
+
+document.getElementById("d-f").addEventListener("touchstart", (ev) => {
+  ev.preventDefault();
+  directionStatus.front = true;
+  setDirectionStyle();
+});
+document.getElementById("d-rf").addEventListener("touchstart", (ev) => {
+  ev.preventDefault();
+  directionStatus.right = true;
+  directionStatus.front = true;
+  setDirectionStyle();
+});
+
+document.getElementById("d-l").addEventListener("touchstart", (ev) => {
+  ev.preventDefault();
+  directionStatus.left = true;
+  setDirectionStyle();
+});
+
+document.getElementById("d-r").addEventListener("touchstart", (ev) => {
+  ev.preventDefault();
+  directionStatus.right = true;
+  setDirectionStyle();
+});
+
+document.getElementById("d-lb").addEventListener("touchstart", (ev) => {
+  ev.preventDefault();
+  directionStatus.left = true;
+  directionStatus.back = true;
+  setDirectionStyle();
+});
+
+document.getElementById("d-b").addEventListener("touchstart", (ev) => {
+  ev.preventDefault();
+  ev.stopPropagation();
+  directionStatus.back = true;
+  setDirectionStyle();
+});
+
+document.getElementById("d-rb").addEventListener("touchstart", (ev) => {
+  ev.preventDefault();
+  directionStatus.right = true;
+  directionStatus.back = true;
+  setDirectionStyle();
+});
+
+document.addEventListener("touchend", (ev) => {
+  ev.preventDefault();
   directionStatus.right = false;
   directionStatus.left = false;
   directionStatus.front = false;
@@ -551,6 +669,15 @@ document.getElementById("empty-battery").addEventListener("click", () => {
     document.getElementById("empty-battery").classList.add("active");
   else document.getElementById("empty-battery").classList.remove("active");
 });
+document
+  .getElementById("empty-battery")
+  .addEventListener("touchstart", (ev) => {
+    ev.preventDefault();
+    batteryWarnStatus = !batteryWarnStatus;
+    if (batteryWarnStatus)
+      document.getElementById("empty-battery").classList.add("active");
+    else document.getElementById("empty-battery").classList.remove("active");
+  });
 //#endregion
 
 //#region connection Taner
